@@ -1,0 +1,99 @@
+
+
+{
+  "token": "NzczNDgzOTY5Njk3ODA4Mzg1.GD1xH2.w5o24CFQEeTXK9fJE7HL3GxZXC80u6paHSWloc",
+  "clientID": "773483969697808385",
+  "secret": "jiM31Jas30pUxlJHUkrweijv8OT4s8aB",
+  "callback": "https://Bobo-v4.mumin11111.repl.co/callback",
+  "prefix": "+",
+"joinchannel":"1235973875167137984",
+
+  "serverid":"1130952613844754592",
+
+  "owners":"743887896481628190",
+
+  "server": {
+ 
+    "role": {
+      "partnerRole":"1235973875167137984",
+      "administrator":"1235973875167137984",
+      "moderator":"1235973875167137984"
+    }
+  },
+  "music":{
+    "maxV":"100"
+  },
+
+
+   
+    "languages": [
+        { "flag": "gb", "code": "en", "name": "English" },
+      { "flag": "ckb", "code": "ckb", "name": "Kurdish" },
+
+      
+        { "flag": "iq", "code": "ar", "name": "Arabic" }
+        
+    ],
+
+
+
+
+  "invitelink": "https://discord.com/oauth2/authorize?client_id=1007628000520577054&permissions=0&redirect_uri=https%3A%2F%2FBobo-v4.mumin11111.repl.co%2Fcallback&response_type=code&scope=identify%20guilds.join%20bot",
+
+  
+
+  
+
+  "mongoURL": "mongodb+srv://robot:robot@robot.ab55g4a.mongodb.net/?retryWrites=true&w=majority&appName=robot",
+  "channels": {
+    "news":"1028608013432528917",
+    "status":"898557730707636247",
+    "webstatus":"962002703200956472",
+  "logChannel":"936779017854529608",
+  "debug":"936779554226335784"},
+  "badge": {
+    "invite": "https://media.discordapp.net/attachments/934034173780455454/934036587673698354/images.jpeg",
+    "game": "",
+    "lover": "https://media.discordapp.net/attachments/934034173780455454/934043059161792612/PicsArt_01-21-02.13.07.png"
+  },
+"support":"https://discord.gg/rjhPpahNNR",
+  "embed": {
+    "Color": "#00B7BE",
+    "footer": "BoBo Team"
+  },
+  "webhook": {
+    "id2": "963051278097866844",
+    "token2":"iEX5P8B9fIg3pf_vXW05c2HTJ4kYoyfrvTXIrgllcSogB8SVQLJsuPIuTmZLGuL4mQ6p",
+    "id": "898151785783508993",
+    "token": "pNBxD74wVmXvUTdgG5KmEEA_lfrXxorLOZzA96KJ9EY6FDqJd0fOPUrlfPNEXjOI0ag3"
+  },
+
+  "img": {
+    "blue": "https://imgur.com/wgljRvr.png",
+    "mor": "https://imgur.com/wH8wcgv.png",
+    "bainjani": "https://imgur.com/StTO12l.png",
+    "prtaqali": "https://imgur.com/MZzt9zF.png"
+  },
+
+"apiKeys":{
+  "dbl":"xxx"
+  
+  
+},
+  "votes":{
+    
+    "password":"xxx",
+    "port":"8080",
+    "channel":"963036632360042547"
+  },
+  
+    "youtubeCookie": "SID=MggGbEnqcYxKS-4rzFInVmHWyYuHuotcFPNWnA2PLMqq0fJdjCU5pXau5Edw3RuuZFOL6Q",
+  "spotify_api": {
+        "enabled": true, "_COMMENT_": "",
+        "clientSecret": "04d46ffbceb14ccfa503923c0ef0aef0",
+        "clientId": "434c18a7a6c04bec9ef22679b4c508eb",
+        "callbackURL":"http://open.spotify.com/track/6rqhFgbbKwnb9MLmUQDhG6"
+  }
+
+
+}
