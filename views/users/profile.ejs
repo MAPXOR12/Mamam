@@ -1,0 +1,282 @@
+<%- include ('../parts/head',{bot,user})%>
+<title><%= member.username %> | Profile</title>
+<head>
+    <meta name="og:title" content="<%= member.username %> | Profile">
+    <meta name="og:description" content="<%= data ? (data.info ? data.info : member.username+' has no have any biography.') :member.username+' has no have any biography.'%>">
+    <meta name="og:image" content="https://cdn.discordapp.com/avatars/<%=member.id%>/<%=member.avatar%>.png">
+</head>
+  
+  
+<style>/*
+  .container{
+    
+    position:relative;
+    
+    top:90px;
+    
+  }
+  
+  
+  
+  /* STATUS */
+.status-circle {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.status-online {
+    color: #46f154;
+}
+.status-dnd {
+    color: #f14668;
+}
+.status-idle {
+    color: yellow; 
+}
+.status-offline {
+    color: #727272;
+}
+.status-invisible {
+    color: #727272;
+}
+  .container .columns{
+  display:block;
+    
+    margin-top:-140px;
+    
+    
+  }
+  .container .table th{
+    
+    
+    
+  }
+  .container .table td{
+    border:none;
+
+  }
+  
+  .container .table .table-striped th{
+    color: var(--text-color);
+    font-size:18px;
+    
+  }
+  .container .table .table-body td{
+    
+    color: var(--text-color);
+  }
+  .background-image{
+
+  top:-30px;
+    width:0;
+    position: relative;
+  
+    
+  }
+  .background-image img{
+    
+  
+    width:100%;
+    
+    
+    
+  }
+
+  
+
+  .img-fluid{
+    object-fit:cover; 
+    height:200px;
+    width:100%;
+    margin-top:-25px;
+  }
+  .container .user-section img{
+  border:5px solid var(--navlist-color);
+    border-radius: 50%;
+    position: relative;
+  
+    width:80px;
+    height:80px;
+    margin-top: -40px;
+    
+  }
+  .user-section .user-content{
+  
+
+    display:inline-flex;
+    
+  }
+  .user-section .user-content p{
+display:flex;
+    text-align:left;
+    font-size:20px;
+    color:var(--text-color);
+    margin-left:4px;
+      padding-right:3px;
+  }
+  .user-section .user-content p span{
+  
+    color:var(--h-color);
+    padding-left:3px;
+    
+    
+  }
+  .information-list{
+    position:relative;
+    
+    text-align:left;
+    
+  }
+  .information-list h4{
+    
+    padding-top:10px;
+    color:var(--h-color);
+  }
+  .information-list .table{
+    color:var(--text-color);
+  
+  
+  /*background:#0D1623;
+  */  border-radius:5%;
+    text-align:left;
+  
+    
+  }
+  
+
+
+  .edit-button{
+    display:block;
+  margin-right:30px;
+    
+  }
+  .edit-button ul{
+    position: relative;
+    margin:auto;
+    margin-right:20px;
+  }
+  .edit-button li{
+    
+    list-style:none;
+    width:100%;
+    background:#3C4A5F;
+    border-radius:2px;
+  }
+  .edit-button li a{
+  
+    font-size:17px;
+    text-decoration:none;
+
+  color:white;
+  }
+  .edit-button li i{
+    
+    padding-right:10px;
+  }
+  
+  </style>
+
+  <img src="<%= data.attch.background%>"class="img-fluid">
+
+  <div class="container">
+  
+    <div class="row">
+      <% if(data){%>
+     
+      <div class="user-section">
+        <img src="<%= member.displayAvatarURL({format:"png"})%>">
+        <div class="user-content">
+          <p><%= convert(data.money)%> <span>Balance</span></p>
+          <p><%= data.data.reps.given%><span>Reps<sub>Given</sub></span></p>
+          <p><%= data.data.reps.received%><span>Reps<sub> received</sub></p> 
+        </div>
+        </div>
+      
+  <% if(req.user.id === member.id){%>
+    <div class="edit-button">
+      <ul>
+        <li><a href="/profile/<%= member.id%>/edit" style="background:#575662"><i class="fa-solid fa-pen"></i>Edit</a></li>
+      </ul>
+      
+      
+    </div><!--
+    <div class="information-list">
+      <h4>Notes</h4>
+      
+      <% data.data.note.map((note) => { %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th> ID</th>
+            <th>DATE</th>
+            <th>NOTE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= note.ID%></td>
+              <td><%= note.DATE%></td>
+              <td><%= note.MSG%></td>
+                </tr>
+              </tbody>
+              </table>
+            <!--
+      <li><%= note.ID%></li>
+          <li><span>Id</span><%= note.NAME%></li>
+          <li><span>Date</span><%= note.DATE%></li>
+          <li><span>Note</span><%= note.MSG%></li>
+          
+      <% })%>  
+    
+      
+    </div>-->
+    <% }%>
+      <% }%>
+    </div>
+    
+    
+    
+    
+    
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!--
+  <div class="background-image"><img  onerror="imgError(this);" src="<%=data.attch.background%>"alt="Background.png"/>
+  </div>
+  
+  
+  <div class="container">
+
+        <div class="column  is-2">
+            <img onerror="imgError(this);" draggable="false" class="pulse-avatar-online" onerror="imgError(this);" ="" src="<%=member.displayAvatarURL({dynamic:true}) %>" style="width: 100px; border-radius: 50%;">
+        </div>
+    
+       <div class="column is-6">
+          <p translate="no" class="
+      <% if(req.user.id === member.id){%>
+      <a class="btn btn-warning" href="/profile/<%= user.id%>/edit">Edit profile</a>
+        <% }%>    <hr>
+      -->
+        
+        
+      <script>
+        const arrow  = document.querySelector(".arrow")
+const list = document.querySelector(".table")
+arrow.addEventListener('click',()=>{
+      list.classList.toggle("open")
+                       
+                       })
+      
+        
+        
+        </script>
+        <br>
+   <%- include('../parts/foot')%>

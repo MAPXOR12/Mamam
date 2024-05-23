@@ -1,0 +1,47 @@
+<%- include ('../parts/head.ejs',{bot,user})%>
+  
+  
+  <br>
+  <br>
+  <div class="container">
+    
+    <div class="row">
+    
+        <% docs.slice(0,10).map((u,i) => {
+        const h = bot.users.cache.get(u.id);
+          const money = u.money
+          const rank = String(i+1);%>
+          <% if(h){%>
+          <div class="top-section">
+            <div class="user-img">
+          
+              <img loading="lazy" onerror="imgError(this);" src=" https://cdn.discordapp.com/avatars/<%= h.id%>/<%= h.avatar%>.png">
+           
+                
+                </div>
+            
+        
+        <div class="name">
+      
+          <span><%= h.tag%></span>
+          
+        </div>
+          <div class="top-img">
+    <p><%= convert(money)%></p>
+          
+          </div>
+        
+        <div class="top-number">
+          <p><%= rank%></p>
+        </div>
+          
+            </div>
+        <% }%>
+        <% })%>  
+    
+    </div>
+  </div>
+  
+    
+    
+  <%- include ('../parts/foot.ejs')%>

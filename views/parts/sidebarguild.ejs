@@ -1,0 +1,247 @@
+<%- include('./meta.ejs')%>
+  
+    <style>
+     .status-online{
+        color: green;
+      }
+      .background-sidebar{
+
+background-position: center;
+      
+      
+      }
+        .dropdown-menu{ 
+  background:var(--contact-form);
+  }
+  
+
+
+  </style>
+  
+  <div class="sidebar">
+  <div class="logo-detail">
+    <br>
+    </div>
+    <br>
+ <div class="nav-list">
+   
+     <% if (guild.icon) {
+ iconurl = "https://cdn.discordapp.com/icons/" + guild.id + "/" + guild.icon + ".png??size=300";
+} else {
+ iconurl = "https://cdn.glitch.com/82fe990a-7942-42e3-9790-39807ccdb9f6%2Ficon-404-dark.png?v=1602427904949";
+}
+%>
+     <div class="guild-img">
+       <img src="<%= iconurl%>" alt="<%= guild.name%>">
+       <p style="color:var(--white);"><%= guild.name%></p>
+     </div>
+     
+     <ul class="list" >
+     
+     <li>
+         <a href="/dashboard/guild/<%=guild.id%>/setting">
+           <i class="fa-solid fa-gear"></i>
+           <span class="link_name">Setting</span>
+         </a>
+    
+     </li>
+
+     <li>
+          
+    
+               
+      <a href="/dashboard/guild/<%=guild.id%>/xpsystem">
+        <i class="fa-solid fa-chart-column"></i>
+         <span class="link_name">Leveling</span>
+               
+  
+       </a>
+ 
+       
+     
+     </li>
+          <li>
+        
+               
+      <a href="/dashboard/guild/<%=guild.id%>/autorole">
+        <i class="fa-solid fa-user"></i>
+         <span class="link_name">AutoRole</span>
+               
+
+       </a>
+          
+       
+  
+
+        
+     </li>
+     <li>
+      
+               
+      <a href="/dashboard/guild/<%=guild.id%>/logsystem">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+         <span class="link_name">Logs</span>
+               
+
+       </a>
+          
+       
+  
+
+       
+     </li>
+
+          <li>
+      
+               
+      <a href="/dashboard/guild/<%=guild.id%>/security">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+         <span class="link_name">Security</span>
+               
+
+       </a>
+          
+       
+  
+
+       
+     </li>  
+     <li>
+        
+               
+      <a href="/dashboard/guild/<%= guild.id%>/welcome">
+        <i class="fa-solid fa-user-plus"></i>
+         <span class="link_name">Welcome</span>
+               
+
+       </a>
+
+       
+       
+       </li>
+       <li>
+        
+           <a href="/dashboard/<%=guild.id%>/leaderboard">
+             <i class="fa-solid fa-users"></i>
+             <span class="link_name">LeadrBoard</span>
+           </a>
+        
+         
+
+        
+     </li>
+<br>
+       </div>
+      
+         </div>
+         
+   
+   
+    
+    
+  <div class="home-section">
+        <!--  <img src="https://boboworld.xyz/img/pattern.svg">
+-->
+    <div class="home-img">
+     <!-- <a href="/"> <img src="<%=bot.user.displayAvatarURL()%>"/></a>-->
+    </div>
+        <% if(user){%>
+<div class="home-profile">
+  
+  <img class="buttonimg" src="https://cdn.discordapp.com/avatars/<%= user.id%>/<%= user.avatar%>"/>
+
+  <ul class="list2">
+    
+    <li><i class="fa-solid fa-address-card"></i> <a href="/profile/<%= user.id%>">PROFILE</a></li>
+    <% if(user.id === config.owners || config.server.role.moderator || config.server.role.moderator){%>
+      <li><i class="fa-solid fa-gear"></i><a href="/admin">Administrator</a></li>
+      <% }%>
+
+
+<li>
+                           
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Languages
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <ul class="language-list">
+              
+            <% config.languages.map(x => { %>
+            
+              
+                <li><a translate="no" onclick="doGTranslate('en |<%= x.code %>')" class="language-btn" id="language-btn">
+                <img src="https://boboworld.xyz/img/<%= x.name %>.png">
+                    &nbsp;<%= x.name%>
+                </a></li>
+                <% }) %>
+    </ul></div>
+  </div>
+      </li>
+                
+
+        
+        <li><i class="fa-solid fa-arrow-right-from-bracket"></i><a href="/logout">Logout</a></li>
+    
+        <li>
+               <div class="theme-switch-wrapper">
+                  <div style="display: flex; align-items: center">
+                     <a title=""  rel="nofollow">Light Mode:</a>&nbsp;
+                     <label class="theme-switch" for="checkbox"
+                       >
+                        <input type="checkbox" id="checkbox" />
+                        
+                     </label>
+                  </div>
+               </div>
+            </li>
+
+        
+        
+                </ul>
+    </div>
+      <% } %>
+
+    <div class="home-content">
+      
+      <span class="text"><i class="fa-solid fa-bars"></i></span>
+    </div>
+
+       </div>
+    
+  
+<script>
+  
+  let sidebar= document.querySelector(".sidebar");
+  let sidebarBtn= document.querySelector(".text");
+  sidebarBtn.addEventListener('click',()=>{
+    
+    sidebar.classList.toggle("open");
+  
+  });
+  
+  
+  let langbtn = document.querySelector(".btn");
+  let langsection = document.querySelector(".dropdown-menu");
+
+  langbtn.addEventListener("click", function (){
+langsection.classList.toggle("show")
+
+
+  })
+  
+ let profile = document.querySelector(".list2");
+let profilebtn = document.querySelector(".buttonimg");
+  profilebtn.addEventListener('click',()=>{
+    profile.classList.toggle("open");
+    
+  
+  })
+  
+
+</script>
+
+  
+  <br>
+  <br>
+  <br><br>

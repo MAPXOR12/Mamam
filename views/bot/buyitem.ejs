@@ -1,0 +1,141 @@
+<%- include ("../parts/head.ejs",{bot,user})%>
+  <style>
+    
+    .item-body{
+      box-shadow:10px 10px 10px 10px rgba(0,0,0,0.3);
+      height:350px;
+position: relative;
+    }
+    .item-body button{
+      width:100px;
+      
+      position:relative;
+      
+    }
+    .item-body button a {
+      color:var(--white);
+      text-decoration:none;
+    }
+    .row img{
+      margin-top:50px;}
+    .toast-page{
+position: absolute;
+    z-index:100;
+    /*margin-top:-350px;*/
+    }
+   .toast{
+    
+      background:var(--nav-color);
+     height:100%;
+    width:100%;
+
+    }
+    
+    
+  </style>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+   <form method="POST">
+    <div class="row">
+      
+      
+    <div class="item-body">
+    <img class="img-fluid" loading="lazy"  src="<%=img%>">
+      
+      <button type="button" id="showtoast" class="btn btn-primary">Buy</button>
+      <a  class="btn btn-danger" href="/items">Back</a>
+  
+        </div>
+      
+      
+      
+      
+  
+     <div class="container toast-page">
+  <div id="toast-showed" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<%= bot.user.displayAvatarURL({format: "png"})%>" width="30px" height="30px" class="rounded me-2" alt="...">
+      <strong class="me-auto"></strong>
+      <small><%=id?.type%></small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      
+      <p> Item price: $<%= id?.price%></p>
+      <label for="background">Set to Profile ?</label>
+      <input type="checkbox" id="background" value="" class="form-input-check">
+<br>
+    <img loading="lazy" src="<%= id?.assets.link%>" class="img-fluid is-size-1">
+    </div>
+      <button type="submit" class="btn btn-success">Apply</button>
+  </div>
+</div>
+       </div>
+      </form>
+  </div>
+
+  <script>
+    
+    var toastbtn = document.getElementById('showtoast')
+var toastbtnremove = document.querySelector(".btn-close")
+
+var toastLive= document.getElementById('toast-showed')
+if (toastbtn) {
+  toastbtn.addEventListener('click', function () {
+    toastLive.classList.add("show");
+  })
+
+}
+    if(toastbtnremove){
+toastbtnremove.addEventListener('click', function (){
+  toastLive.classList.remove("show");
+})}
+   document.addEventListener("DOMContentLoaded", function (){
+     
+     var btn = document.querySelector('input[id="background"]');
+     btn.addEventListener("change", function (){
+    if(btn.checked){
+      $.post("/item/<%= id.id%>",{
+        background:true
+      })}else{
+        $.post("/item/<%= id.id%>",{
+          background:false,
+        })
+               
+
+     
+     
+     }})})
+    
+  
+    var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('success') && urlParams.get('success')){
+    Swal.fire({
+     icon: 'success',
+     title: 'Succesfull...',
+     closeOnConfirm: false,
+     text: urlParams.get('message'),
+     footer: 'All right reserved.'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = `/items`;
+      }
+    })
+    }
+    if(urlParams.has('error') && urlParams.get('error')){
+    Swal.fire({
+     icon: 'error',
+     title: 'Oops...',
+     text: urlParams.get('message'),
+     footer: 'All right reserved.'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/item/<%=id?.id%>';
+      }    
+    })
+    }
+  </script>
+  
+  <%- include ("../parts/foot.ejs")%>

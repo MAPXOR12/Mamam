@@ -1,0 +1,128 @@
+<%- include ('../parts/head.ejs',{bot,user})%>
+  
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <style>
+     .card{
+       border-radius: 13px;
+       background:#1E1E1E;
+     border-left: 3px solid #277ECD;
+       border-left-top-radius: 2px;
+     
+    } </style>
+  <div class="row">
+  
+   <div class="select-server">
+     
+     <p>SELECT A SERVER</p>
+       </div>
+    
+       <% const use = bot.guilds.cache.get(config.serverid).members.cache.get(user.id) %>
+      <% if (!use) { %>
+    <div style="width: 512px;
+	 padding: 16px;
+	 margin: 8px;  background-color: rgba(77, 77, 255, 0.05);">
+      <h3 style="color: #4d4dff; 	 margin-top: 0;
+	 margin-bottom: 8px;
+	 font-size: 18px;
+	 font-family: 'Poppins', sans-serif;">Hey <%= user.username%>!</h3>
+      <p style="margin: 0;
+	 font-size: 14px;
+	 font-family: 'Open Sans', sans-serif;
+	 color: #555;">Looks like you aren't in BoBo Support Server. <a href="/support">Join Here!</a></p>
+    </div>
+
+  <% } %>
+    <br>
+    
+   <% user.guilds.forEach(guild => {
+  
+ const permsOnGuild = new perms(guild.permissions_new);
+ if(!permsOnGuild.has(perms.Flags.ManageGuild)) {
+ return;
+ }
+%>
+<% if (guild.icon) {
+ iconurl = "https://cdn.discordapp.com/icons/" + guild.id + "/" + guild.icon + ".png??size=70";
+} else {
+
+iconurl = "https://cdn.glitch.com/82fe990a-7942-42e3-9790-39807ccdb9f6%2Ficon-404-dark.png?v=1602427904949"}
+%>
+
+  <% if(bot.guilds.cache.get(guild.id)) { %>
+    
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <%= guild.name%></div>
+                      <hr>
+                        <div class="h5 mb-0 font-weight-bold text-white"><a  class="btn btn-success" href="/dashboard/guild/<%= guild.id%>">DASHBOARD</a></div>
+                    </div>
+                    <div class="col-auto">
+                     <% if(guild.icon){%>
+                      <img loading="lazy"  style="border: 2px solid green; border-radius: 50%;"  alt="<%= guild.name%>"src="<%= iconurl%>">
+                      <% }else{%>
+                        <img loading="lazy" style="border: 2px solid green; border-radius: 50%;" alt="<%= guild.name%>" src="https://imgur.com/tiZmKiK.png" width="140px" height="140px">
+                      
+                   <% }%>     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+  
+    
+    
+
+    <% }%>
+  <% if (!bot.guilds.cache.get(guild.id)) { %>
+       <br>
+       <br>
+        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <%= guild.name%></div>
+                      <hr>
+                        <div class="h5 mb-0 font-weight-bold text-white"><a href="https://discord.com/api/oauth2/authorize?client_id=<%= bot.user.id%>&permissions=67206193&scope=bot&guild_id=<%= guild.id%>" class="btn btn-primary">Invite</a></div>
+                    </div>
+                    <div class="col-auto">
+                      <% if(guild.icon){%>
+                        <img loading="lazy" alt="<%= guild.name%>" style="border: 3px solid green; border-radius:50%;" src="<%=iconurl%>">
+                  <% }else{ %> 
+                    
+                    <img loading="lazy" alt="<%= guild.name%>" style="border: 3px solid green; border-radius: 50%;" src="https://imgur.com/tiZmKiK.png" width="140px" height="140px">
+                    <% }%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+  
+      
+    
+       <% }%>
+       
+       
+    <%   })%>
+    
+
+           </div>
+    
+         
+
+  
+  
+  <%- include ("../parts/foot")%>

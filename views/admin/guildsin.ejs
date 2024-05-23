@@ -1,0 +1,27 @@
+<%- include ("./static/head")%>
+  
+  
+  <div class="container">
+    
+    <% bot.guilds.cache.sort((a, b) => b.memberCount - a.memberCount).map(r => r).map((r, i) =>{ let h = bot.users.cache.get(r.ownerId);%>
+      
+      <table class="table table-hover">
+        <thead>
+          <tr>
+          <th>name</th>
+          <th>owner</th>
+          <th>count</th>
+          </tr>
+        </thead>
+  
+          <tbody>
+            <tr>
+            <th><%= r.name%></th>
+            <th><%= h.tag%></th>
+                <th><%= r.memberCount%></th>
+            </tr>
+                </tbody>
+      </table>
+              <% }).slice( ).join("\n");%>
+    
+  <%- include ("./static/foot")%>

@@ -1,0 +1,192 @@
+<%- include ('../parts/head.ejs',{bot,user})%>
+  <br>
+  <br>
+  
+  <style>
+    
+   .enable-button{
+     
+     background:var(--nav-color);
+     border:none;
+     width:100%;
+     border-radius:10%;
+     height:230px;
+     
+    }
+    .enable-button:hover{
+background:orange;
+      
+    }
+    .enable-button:hover i{
+color: #fff;
+    }
+      
+    .enable-button i{
+  
+  color:orange;
+  font-size:50px;
+  
+    }
+.disable-button{
+  border-radius:10%;
+  background:var(--nav-color);
+  border:none;
+    width:100%;
+  height:230px;
+  
+    }
+    .disable-button i{
+      color:#767A81;
+      font-size:50px;
+      
+    }/*
+    @media only screen and (min-width:600px){
+
+form {
+margin-right:150px;
+  
+}
+
+      
+    } */ </style>
+  
+  <div class="container">
+    
+    
+   <div class="container contact-form ">
+     <div class="contact-img">
+       <i></i>
+     </div>
+     <form method="post">
+<div class="row">
+  
+     <% if(data.time !== null && cooldown - (Date.now() - data.time) > 0){ %>
+       <div class="form-group">
+         
+         <h3> You Are claimed Your Daily</h3>
+         <button  class="disable-button" disabled><i class="fa-solid fa-gift"></button>
+          
+           
+          
+        
+           <p id="time">Time Left</p>
+             <button class="btn btn-danger" disabled>when Time left ended Must refresh page</button>
+             
+      
+           </div>
+         <% }else{%>
+       <div class="form-group"id="daily">
+         <h3> Claim You Daily</h3>
+         
+         
+         
+       <button type="submit" class="enable-button" onclick="onclick()">  <i class="fa-solid fa-gift"></i></button>
+            </div>
+       
+       <% }%>
+      </div>
+  
+
+</form>      
+             
+             
+    </div>
+    
+    
+    
+  </div>
+
+  
+  <!--
+  <div class="container">
+    
+    <div class="container contact-form">
+      <div class="row">
+        <form method="post">
+          <% if(data.time !==null &&cooldown -(Date.now() -data.time) >0){ %>
+            
+      
+            
+            
+            
+            
+            
+            
+          <% } %>
+          
+          
+          
+          
+        </form>
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+    -->
+    
+  <script>
+  var countDownDate = "<%= cooldown%>";
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = Date.now()- "<%=data.time%>";
+    
+  // Find the distance between now and the count down date
+  var distance =  countDownDate - now ;
+    
+  // Time calculations for days, hours, minutes and seconds
+ var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+   
+  document.getElementById("time").innerHTML = hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+   document.getElementById("time").innerHTML = "EXPIRED";
+  }
+}, 1000);
+  
+var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('success') && urlParams.get('success')){
+    Swal.fire({
+     icon: 'success',
+     title: 'Successful...',
+     closeOnConfirm: false,
+     text: urlParams.get('message'),
+     footer: 'Copyright 2022 &copy  - All right reserved.'
+    }).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href = `/daily`;
+  }
+})
+      
+      
+      
+      
+}
+    
+    
+  if(urlParams.has('error') && urlParams.get('error')){
+    Swal.fire({
+     icon: 'error',
+     title: 'Oops...',
+     text: urlParams.get('message'),
+     footer: ' - All right reserved.'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/daily';
+      }
+    })}
+</script>
+  
+  
+  <%- include ('../parts/foot.ejs')%>

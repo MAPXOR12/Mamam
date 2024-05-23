@@ -1,0 +1,120 @@
+<%- include ('../parts/head.ejs',{bot,user})%>
+  <style>/*
+    .column a{
+    
+      line-height: 30px;
+    }
+   
+  .column  img{
+    
+    justify-content:space-between;
+
+    padding: 20px 10px 20px 10px;
+    
+  
+    }
+  
+   .bgs{
+    
+      
+      background:var(--sharabi);
+      position: absolute;
+    margin-left:10px;
+    width:80px;
+     
+      border-bottom-right-radius:15%;
+      border-top-left-radius:15%;
+  
+    }
+
+    .bgs strong{
+    pointer-events:none;
+  
+      color: var(--white);
+    left:60px;
+      
+    }
+    
+    @media only screen and (min-height:800px){
+      .bgs{
+     display:inline-flex;
+    margin-left:-300px;
+      }
+  .column img{
+    padding-left:10px; 
+    paddin-top:30px;
+    paddin-right:10px;
+    
+      }
+  
+      
+      
+    }*/
+  
+.container .text-xs{
+  
+  background: var(--price-color);
+  width:60px;
+  bottom:0;
+  position: relative;
+  top:50px;
+margin-left:30px;
+    }
+  </style>
+  <div class="container">
+    
+    
+        <% market.map((item)=>{ %>
+          <div class="row">
+  <div class="col-xl-3 col-md-6 mb-4">
+        
+        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+          $<%= item.price%></div>
+      
+        
+      
+<a href="/item/<%=item.id%>">
+<br>
+  <img loading="lazy" src="<%= item.assets?.link%>"  style="width:300px; height:170px; border-radius:3%;box-shadow:10px 10px 10px 10px rgba(0, 0, 4, 0.28);" alt="<%=item.id%>"/>
+  
+            
+          </a>
+          
+    </div>
+            </div>
+              
+           <% })%>     
+            
+     
+     
+    
+             </div>
+     
+        
+   <script>          
+    
+     
+    const toast = document.querySelector(".toast"), 
+  btn =  document.querySelector("button");
+    
+    let btnx = document.querySelector(".remove");
+btn.addEventListener('click',()=>{
+  
+  
+    toast.classList.add("show");
+
+  }); 
+    
+     btnx.addEventListener('click',()=>{
+       toast.classList.remove('show');
+     });
+    
+       
+       
+
+    
+     
+        </script>   
+  <br>
+  <br>
+  <%- include ('../parts/foot')%>

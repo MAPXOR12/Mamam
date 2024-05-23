@@ -1,0 +1,252 @@
+
+        var plus = document.querySelector(".plus");
+ var minus = document.querySelector(".minus");
+ var num = document.querySelector(".numb");
+    let a = 1,
+b =1,
+      c=1,
+      d=1,
+      e=1,
+      f=1,
+      g=1,
+      h=1
+        
+plus.addEventListener("click", ()=>{
+  a++;
+  a = ( a < 10) ? "0" + a : a;
+  if(a>10){return;}else{
+  num.value = Number(a) ;
+  }
+  
+});
+minus.addEventListener("click", ()=>{
+ if(a>1){
+   a--;
+  a = ( a < 10) ? "0" + a : a;
+  num.value = Number(a) ;
+        }
+  
+});
+
+
+var plus2 = document.querySelector(".plus2");
+ var minus2 = document.querySelector(".minus2");
+ var num2 = document.querySelector(".numb2");
+
+        plus2.addEventListener("click", ()=>{
+  b++;
+  b = ( b < 10) ? "0" + b : b;
+  if(b>10){return;}else{
+  num2.value = Number(b) ;
+  }
+  
+});
+minus2.addEventListener("click", ()=>{
+ if(b>1){
+   b--;
+  b = ( b < 10) ? "0" + b : b;
+  num2.value = Number(b) ;
+        }
+  
+});
+var plus3 = document.querySelector(".plus3");
+ var minus3 = document.querySelector(".minus3");
+ var num3 = document.querySelector(".numb3");
+
+        plus3.addEventListener("click", ()=>{
+  c++;
+  c = ( c < 10) ? "0" + c : c;
+  if(c>10){return;}else{
+  num3.value = Number(c) ;
+  }
+  
+});
+minus3.addEventListener("click", ()=>{
+ if(c>1){
+   c--;
+  c = ( c < 10) ? "0" + c : c;
+  num3.value = Number(c) ;
+        }
+  
+});
+        var plus4= document.querySelector(".plus4");
+ var minus4 = document.querySelector(".minus4");
+ var num4 = document.querySelector(".numb4");
+
+        plus4.addEventListener("click", ()=>{
+  d++;
+  d = ( d < 10) ? "0" + d : d;
+  if(d>10){return;}else{
+  num4.value = Number(d) ;
+  }
+  
+});
+minus4.addEventListener("click", ()=>{
+ if(d>1){
+   d--;
+  d = ( d < 10) ? "0" + d : d;
+  num4.value = Number(d) ;
+        }
+  
+});
+        var plus5 = document.querySelector(".plus5");
+ var minus5 = document.querySelector(".minus5");
+ var num5 = document.querySelector(".numb5");
+
+        plus5.addEventListener("click", ()=>{
+  e++;
+  e = ( e < 10) ? "0" + e : e;
+  if(e>10){return;}else{
+  num5.value = Number(e) ;
+  }
+  
+});
+minus5.addEventListener("click", ()=>{
+ if(e>1){
+   e--;
+  e = ( e < 10) ? "0" + e : e;
+  num5.value = Number(e) ;
+        }
+  
+});
+
+var plus6 = document.querySelector(".plus6");
+ var minus6 = document.querySelector(".minus6");
+ var num6 = document.querySelector(".numb6");
+
+        plus6.addEventListener("click", ()=>{
+  f++;
+  f = ( f < 10) ? "0" + f :f;
+  if(f>10){return;}else{
+  num6.value = Number(f) ;
+  }
+  
+});
+minus6.addEventListener("click", ()=>{
+ if(f>1){
+   f--;
+  f = ( f < 10) ? "0" + f : f;
+  num6.value = Number(f) ;
+        }
+  
+});
+
+
+
+          document.addEventListener('DOMContentLoaded', function () {
+  var checkbox = document.querySelector('input[id="switch-form"]');
+if(checkbox.checked){
+  
+  document.getElementById("antis").style.display ="block";
+}else{ 
+  document.getElementById("antis").style.display ="none";
+};
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+    document.getElementById("antis").style.display="block";
+      
+      $.post("/dashboard/guild/<%=guild.id%>/security",{
+        onoff:true,
+    
+      })
+      
+      // do this
+      console.log('Checked');
+    } else {
+      
+  document.getElementById("antis").style.display = "none";
+      $.post("/dashboard/guild/<%=guild.id%>/security",{
+        onoff: false,
+        
+        
+      })
+      // do that
+      console.log('Not checked');
+    }
+  });
+
+          })
+
+            /////channelCreate
+        document.addEventListener('DOMContentLoaded', function () {
+var channelCcheck = document.querySelector('.channelC');
+         channelCcheck.addEventListener("change", function (){
+           
+           if(channelCcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               channelCenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 channelCenabled: false}
+                      )}});
+
+}); 
+     document.addEventListener('DOMContentLoaded', function () {
+        var channelDcheck = document.querySelector('.channelD');
+         channelDcheck.addEventListener("change", function (){
+           
+           if(channelDcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               channelDenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 channelDenabled: false}
+                      )}});
+
+}); 
+        document.addEventListener('DOMContentLoaded', function () {
+        var channelUcheck = document.querySelector('.channelU');
+         channelUcheck.addEventListener("change", function (){
+           
+           if(channelUcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               channelUenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 channelUenabled: false}
+                      )}
+         });
+
+}); 
+
+        ////role system
+
+document.addEventListener('DOMContentLoaded', function () {
+var roleCcheck = document.querySelector('.roleC');
+         channelCcheck.addEventListener("change", function (){
+           
+           if(roleCcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               roleCenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 roleCenabled: false}
+                      )}});
+
+}); 
+        document.addEventListener('DOMContentLoaded', function () {
+var roleDheck = document.querySelector('.roleD');
+         roleDheck.addEventListener("change", function (){
+           
+           if(roleDheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               roleDenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                roleDenabled: false}
+                      )}});
+
+}); 
+        document.addEventListener('DOMContentLoaded', function () {
+var roleUcheck = document.querySelector('.roleU');
+         roleUcheck.addEventListener("change", function (){
+           
+           if(roleUcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               roleUcheckenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 roleUcheckenabled: false}
+                      )}});
+
+}); 

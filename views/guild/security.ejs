@@ -1,0 +1,610 @@
+<%- include("../parts/sidebarguild",{user,bot})%>
+
+<style>
+.switch {
+  position:relative;
+  display:inlin-block;
+  width:70px;
+  height:30px;
+  margin: 0 10px;
+}
+.slider{
+position: absolute;
+  cursor:pointer;
+  left:0;
+  right:0;
+  transition:.4s;
+  border-radius:40px;
+  top:0;
+  bottom:0;
+  background:rgba(79, 78, 77, 0.74);;
+}
+  .switch #switch-form {
+    display:none;
+  }
+.slider:before{
+  position: absolute;
+  content:"";
+  height:28px;
+  width:28px;
+  box-shadow:0 0 10px 0 black;
+  left:0;
+  bottom:1px;
+  background-color:white;
+  transition:.4s;
+  border-radius:50px;
+  
+
+}
+  
+  #switch-form:checked + .slider{
+
+background:var(--switch-form-bgcolor);
+
+  }
+#switch-form:checked + .slider:before{
+  
+transform: translateX(40px)
+
+}
+.switch-small {
+  position:relative;
+  display:inlin-block;
+  width:60px;
+  height:20px;
+ /* margin-left:15px;*/
+ /* margin: 0 10px;*/}
+.slider-small{
+position: absolute;
+  cursor:pointer;
+  left:0;
+  right:0;
+  transition:.4s;
+  border-radius:40px;
+  top:0;
+  bottom:0;
+  background:rgba(79, 78, 77, 0.74);
+}
+  .switch-small #switch-form-small {
+    display:none;
+  }
+.slider-small:before{
+  position: absolute;
+  content:"";
+  height:16px;
+  width:16px;
+  box-shadow:0 0 10px 0 black;
+  left:0;
+  bottom:2px;
+  background-color:white;
+  transition:.4s;
+  border-radius:50px;
+  
+
+}
+  #switch-form-small:checked + .slider-small{
+
+background:var(--switch-small-form-bgcolor);
+
+  }
+#switch-form-small:checked + .slider-small:before{
+  
+transform: translateX(40px)
+
+  }
+  
+.head{
+  font-size:15px;
+flex-wrap: nowrap;
+
+padding-right:10px;
+white-space:none;
+  
+}
+  input[type="number"]{
+    color:#fff;
+    width:150px;
+    
+  }
+  
+  </style>
+<br>
+  <br>
+   <div class="container">
+<div class="container contact-form">
+<div class="contact-image">
+      <i></i>
+  </div>
+
+  
+  <form method="POST">
+  
+      
+     <div class="row">
+          
+            
+              <br><br>
+                            
+                              
+
+
+
+
+  
+
+<div class="form-group">
+  <label for ="switch-form ">Antis</label>
+  <% if(data.enabled){%>
+<label class="switch"><p></p>  <input type="checkbox" id="switch-form" checked>
+  <span class="slider"></span>
+</label><% }else{ %>
+  
+  <label class="switch"><p></p>  <input type="checkbox" id="switch-form">
+  <span class="slider"></span>
+  </label>
+  <%}%>
+
+</div>
+       <hr>
+<div class="form-group "id="antis">
+  <div class="d-flex justify-content-between">
+
+<label class="head" for="channelC">Channel Create Limits</label></div>
+<br>
+  <div class="d-flex justify-content-evenly"><span  class="minus h3">-</span>
+
+
+  <input id ="channelC" class="mr-4 text-center text-white numb" type="number" value="<%= data.channelC.limit ||0%>" disabled>
+  <span class="plus h3">+</span>
+    
+       <label class="switch-small">
+         <% if(data.channelC.enabled){%><input class="channelC" type="checkbox" id="switch-form-small" checked>
+  <span class="slider-small"></span>
+           <% } else{%>
+             <input class="channelC" type="checkbox" id="switch-form-small">
+  <span class="slider-small"></span>
+             <%}%>
+    </label>
+      
+</div><hr>
+<br><br><br>
+<div class="d-flex justify-content-between">
+<label class="head" for="channelC">Channel Delet Limits</label></div>
+               <br>
+  <div class="d-flex justify-content-evenly"><span  class="minus2 h3">-</span>
+  <input id ="channelD" class="mr-4 text-center text-white numb2" type="number" value="<%= data.channelD.limit ||0%>"disabled>
+  <span class="plus2 h3">+</span>
+    <label class="switch-small"> <% if(data.channelD.enabled){%>
+      <input type="checkbox" id="switch-form-small" class="channelD" checked>
+  <span class="slider-small"></span>
+      <%}else{%>
+        <input type="checkbox" id="switch-form-small" class="channelD">
+  <span class="slider-small"></span>
+        <%}%>
+    </label>
+</div>
+<hr>
+     <br><br><br>
+    <div class="d-flex justify-content-between">
+<label class="head" for="channelC">Channel Update</label></div><br>
+    
+  <div class="d-flex justify-content-evenly"><span  class="minus3 h3">-</span>
+  <input id ="channelU" class="mr-4 text-center text-white numb3" type="number" value="<%= data.channelU.limit ||0%>"disabled>
+  <span class="plus3 h3">+</span><label class="switch-small">  <% if(data.channelU.enabled){%>
+    <input type="checkbox" id="switch-form-small" class="channelU"checked>
+  <span class="slider-small"  ></span>
+    <% }else{%>
+      <input type="checkbox" id="switch-form-small"class="channelU" >
+  <span class="slider-small" ></span>
+      
+      <%}%>
+  </label>
+
+
+  </div>
+<br><br><br>
+<div class="d-flex justify-content-between">
+<label class="head" for="channelC">Role Create Limits</label></div><br>
+  <div class="d-flex justify-content-evenly"><span  class="minus4 h3">-</span>
+  <input id ="roleC" class="mr-4 text-center text-white numb4" type="number" value="<%= data.roleC.limit ||0%>"disabled>
+  <span class="plus4 h3">+</span>
+    <label class="switch-small"> <% if(data.roleC.enabled){%>
+      <input type="checkbox" id="switch-form-small" class="roleC" checked>
+  <span class="slider-small"></span>
+      <%}else{%>
+        <input type="checkbox" id="switch-form-small" class="roleC">
+  <span class="slider-small"></span>
+        <%}%>
+    </label>
+</div>
+<hr>
+
+<br><br><br>
+<div class="d-flex justify-content-between">
+<label class="head" for="channelC">Role Delete Limits</label></div><br>
+  <div class="d-flex justify-content-evenly"><span  class="minus5 h3">-</span>
+  <input id ="roleD" class="mr-4 text-center text-white numb5" type="number" value="<%= data.roleD.limit ||0%>"disabled>
+  <span class="plus5 h3">+</span>
+    <label class="switch-small"> <% if(data.roleD.enabled){%>
+      <input type="checkbox" id="switch-form-small" class="roleD" checked>
+  <span class="slider-small"></span>
+      <%}else{%>
+        <input type="checkbox" id="switch-form-small" class="roleD">
+  <span class="slider-small"></span>
+        <%}%>
+    </label>
+</div>
+<hr>
+<br><br><br>
+<div class="d-flex justify-content-between">
+<label class="head" for="channelC">Role Update Limits</label></div><br>
+  <div class="d-flex justify-content-evenly"><span  class="minus6 h3">-</span>
+  <input id ="roleU" class="mr-4 text-center text-white numb6" type="number" value="<%= data.roleU.limit ||0%>"disabled>
+  <span class="plus6 h3">+</span>
+    <label class="switch-small"> <% if(data.roleU.enabled){%>
+      <input type="checkbox" id="switch-form-small" class="roleU" checked>
+  <span class="slider-small"></span>
+      <%}else{%>
+        <input type="checkbox" id="switch-form-small" class="roleU">
+  <span class="slider-small"></span>
+        <%}%>
+    </label>
+</div>
+<hr>
+
+        
+</div>
+
+
+
+<hr>
+<button type="submit" name="btnSubmit" id="myButton" onclick="clickOnAdd()" class="btn btn-primary"><i class="fa-bounce fa-solid fa-floppy-disk"></i>Apply</button>
+    </div>
+     
+  </form>
+  
+
+</div>
+  </div>
+<br><br>
+  
+  
+      <script>   
+        
+
+
+var plus = document.querySelector(".plus");
+ var minus = document.querySelector(".minus");
+ var num = document.querySelector(".numb");
+    let a = 1,
+b =1,
+      c=1,
+      d=1,
+      e=1, 
+      f=1
+        
+plus.addEventListener("click", ()=>{
+  a++;
+  a = ( a < 10) ? "0" + a : a;
+  if(a>10){return;}else{
+  num.value = Number(a) ;
+  }
+  
+});
+minus.addEventListener("click", ()=>{
+ if(a>1){
+   a--;
+  a = ( a < 10) ? "0" + a : a;
+  num.value = Number(a) ;
+        }
+  
+});
+
+
+var plus2 = document.querySelector(".plus2");
+ var minus2 = document.querySelector(".minus2");
+ var num2 = document.querySelector(".numb2");
+
+        plus2.addEventListener("click", ()=>{
+  b++;
+  b = ( b < 10) ? "0" + b : b;
+  if(b>10){return;}else{
+  num2.value = Number(b) ;
+  }
+  
+});
+minus2.addEventListener("click", ()=>{
+ if(b>1){
+   b--;
+  b = ( b < 10) ? "0" + b : b;
+  num2.value = Number(b) ;
+        }
+  
+});
+
+        
+var plus3 = document.querySelector(".plus3");
+ var minus3 = document.querySelector(".minus3");
+ var num3 = document.querySelector(".numb3");
+
+        plus3.addEventListener("click", ()=>{
+  c++;
+  c = ( c < 10) ? "0" + c : c;
+  if(c>10){return;}else{
+  num3.value = Number(c) ;
+  }
+  
+});
+minus3.addEventListener("click", ()=>{
+ if(c>1){
+   c--;
+  c = ( c < 10) ? "0" + c : c;
+  num3.value = Number(c) ;
+        }
+  
+});
+        var plus4= document.querySelector(".plus4");
+ var minus4 = document.querySelector(".minus4");
+ var num4 = document.querySelector(".numb4");
+
+        plus4.addEventListener("click", ()=>{
+  d++;
+  d = ( d < 10) ? "0" + d : d;
+  if(d>10){return;}else{
+  num4.value = Number(d) ;
+  }
+  
+});
+minus4.addEventListener("click", ()=>{
+ if(d>1){
+   d--;
+  d = ( d < 10) ? "0" + d : d;
+  num4.value = Number(d) ;
+        }
+  
+});
+        var plus5 = document.querySelector(".plus5");
+ var minus5 = document.querySelector(".minus5");
+ var num5 = document.querySelector(".numb5");
+
+        plus5.addEventListener("click", ()=>{
+  e++;
+  e = ( e < 10) ? "0" + e : e;
+  if(e>10){return;}else{
+  num5.value = Number(e) ;
+  }
+  
+});
+minus5.addEventListener("click", ()=>{
+ if(e>1){
+   e--;
+  e = ( e < 10) ? "0" + e : e;
+  num5.value = Number(e) ;
+        }
+  
+});
+        var plus6 = document.querySelector(".plus6");
+ var minus6 = document.querySelector(".minus6");
+ var num6 = document.querySelector(".numb6");
+
+        plus6.addEventListener("click", ()=>{
+  f++;
+  f = ( f < 10) ? "0" + f :f;
+  if(f>10){return;}else{
+  num6.value = Number(f) ;
+  }
+  
+});
+minus6.addEventListener("click", ()=>{
+ if(f>1){
+   f--;
+  f = ( f < 10) ? "0" + f : f;
+  num6.value = Number(f) ;
+        }
+  
+});
+
+
+
+          document.addEventListener('DOMContentLoaded', function () {
+  var checkbox = document.querySelector('input[id="switch-form"]');
+if(checkbox.checked){
+  
+  document.getElementById("antis").style.display ="block";
+}else{ 
+  document.getElementById("antis").style.display ="none";
+};
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+    document.getElementById("antis").style.display="block";
+      
+      $.post("/dashboard/guild/<%=guild.id%>/security",{
+        onoff:true,
+    
+      })
+      
+      // do this
+      console.log('Checked');
+    } else {
+      
+  document.getElementById("antis").style.display = "none";
+      $.post("/dashboard/guild/<%=guild.id%>/security",{
+        onoff: false,
+        
+        
+      })
+      // do that
+      console.log('Not checked');
+    }
+  });
+
+          })
+
+            /////channelCreate
+        document.addEventListener('DOMContentLoaded', function () {
+var channelCcheck = document.querySelector('.channelC');
+         channelCcheck.addEventListener("change", function (){
+           
+           if(channelCcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               channelCenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 channelCenabled: false}
+                      )}});
+
+}); 
+     document.addEventListener('DOMContentLoaded', function () {
+        var channelDcheck = document.querySelector('.channelD');
+         channelDcheck.addEventListener("change", function (){
+           
+           if(channelDcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               channelDenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 channelDenabled: false}
+                      )}});
+
+}); 
+        document.addEventListener('DOMContentLoaded', function () {
+        var channelUcheck = document.querySelector('.channelU');
+         channelUcheck.addEventListener("change", function (){
+           
+           if(channelUcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               channelUenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 channelUenabled: false}
+                      )}
+         });
+
+}); 
+
+        ////role system
+
+document.addEventListener('DOMContentLoaded', function () {
+var roleCcheck = document.querySelector('.roleC');
+         roleCcheck.addEventListener("change", function (){
+           
+           if(roleCcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               roleCenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 roleCenabled: false}
+                      )}});
+
+}); 
+        document.addEventListener('DOMContentLoaded', function () {
+var roleDheck = document.querySelector('.roleD');
+         roleDheck.addEventListener("change", function (){
+           
+           if(roleDheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               roleDenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                roleDenabled: false}
+                      )}});
+
+}); 
+        document.addEventListener('DOMContentLoaded', function () {
+var roleUcheck = document.querySelector('.roleU');
+         roleUcheck.addEventListener("change", function (){
+           
+           if(roleUcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/security",{
+               roleUenabled: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/security",{
+                 roleUenabled: false}
+                      )}});
+
+}); 
+      function clickOnAdd() {
+       
+        
+    
+$("#myButton").attr("disabled", true);
+ $("#myButton").html('<i class="p-2 fad fa-spinner fa-w-16 fa-pulse fa-lg"></i>');
+
+    setTimeout(() => {
+        $.post('/dashboard/guild/<%=guild.id%>/security',{
+      onoff:true,
+      channelCnumber:$("#channelC").val(),
+          channelDnumber:$("#channelD").val(),
+          channelUnumber:$("#channelU").val(),
+            roleCnumber:$("#roleC").val(),
+          roleDnumber:$("#roleD").val(),
+          roleUnumber:$("#roleU").val(),
+                
+        
+    }).done(function(data){
+        
+                
+                
+                
+                
+                if(data.error){
+      const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: ' something went wrong ',
+  text: data.message,
+})
+                  
+  $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;    
+      
+    
+    
+    
+    }else{
+     const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'successfully',
+})
+  
+      
+            $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;
+    
+    }
+              });
+    },2000)
+        
+        
+        
+    }
+
+
+   </script>
+
+<%- include ("../parts/foot")%>
