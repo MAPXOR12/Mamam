@@ -1,0 +1,31 @@
+const fs = require("fs");
+const Discord = require("discord.js");
+
+
+module.exports = {
+  name: "lang",
+  aliases: ["language"], 
+  description: "To change language", 
+  usage: ["s!lang <language>"],
+  category: ["Moderation"],
+  enabled: true,
+  memberPermissions: [ "SEND_MESSAGES" ],	
+  botPermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
+  ownerOnly: false,
+  cooldown: 15000,
+  run: async (client, message, args, dev) => {
+      if (!args[1])
+        return message.channel.send({embeds:[new Discord.MessageEmbed().setColor(config.embed.Color).setDescription(`Usage : s!language [english,kurdish,arabic,turkish,persian]`)]});
+      let data = await Guild.findOne({ guildID: message.guild.id })
+     // if (args[1].toLowerCase() === "en" || args[1].toLowerCase() === "krd" || args[1].toLowerCase() === "ar" || args[1].toLowerCase() === "tur" || args[1].toLowerCase() === "per") {
+      
+      
+      data.language = args[1].toLowerCase();
+        message.channel.send({embeds:[new Discord.MessageEmbed().setColor(config.embed.Color).setDescription(`
+          Your server language is **${args[1]}**`
+        )]});
+      data.save();
+    if (args[1] === "list") {
+        message.channel.send({embeds:[new Discord.EmbedBuilder().setColor(config.embed.Color).setDescription(`Language list is :\n **english** ,**kurdish** ,**arabic** ,**turkish** ,**persian**`)]});
+      } else {
+        message.channel.send({embeds:[new Discord.EmbedBuilder().setColor(config.embed.Color). setDescription (`
