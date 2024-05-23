@@ -1,0 +1,7 @@
+let hm = new mongoose.Schema({
+id: String,
+country: Array,
+  
+});
+
+module.exports = mongoose.model("analytics", hm);
