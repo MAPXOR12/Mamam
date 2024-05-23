@@ -1,0 +1,34 @@
+module.exports = async (message) => {
+  const data = await Guild.findOne({
+    guildID: message.guild.id,
+  });
+  if(!data.plugins.antis.antilinks){
+
+await Guild.updateOne({guildID: message.guild.id},{
+
+  $set:{
+"plugins.antis.antilinks.enabled":false,
+    
+  },
+})}
+
+
+
+    
+  }
+  if (data.plugins.antis.antilinks.enabled) {
+    if (
+      message.content.match("https://") ||
+      message.content.match("discord.gg") ||
+      message.content.match("www.")
+    ) {
+      message.delete();
+      let msg = message.channel.send({content:"No links allowed while anti-link is active!"}).then((msg) => {
+          let time = "2s";
+          setTimeout(function () {
+            msg.delete();
+          }, ms(time));
+        });
+    }
+  }
+};
