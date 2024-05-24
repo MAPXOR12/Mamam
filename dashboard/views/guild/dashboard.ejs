@@ -1,0 +1,285 @@
+
+ <%- include ("../parts/sidebarguild.ejs",{bot,user})%>
+ 
+   
+   <style>
+     
+   .card,.card2,.card3,.card4{
+       text-align:left;
+       
+       
+       border-radius: 13px;
+       border:1px solid wheat;
+       background:var(--contact-form);
+     
+       border-left-top-radius: 2px;
+     
+     }
+    
+     
+    .card i,.card2 i,.card3 i,.card4 i{
+font-size:24px;
+margin-bottom:55px;
+      background:#fff;
+color:#E4B400;
+border: 2px solid #E4B400;
+border-radius: 20%;
+       padding:12%;
+
+     }  
+    /* .card{
+       border-radius: 13px;
+       background:var(--contact-form);
+     border-left: 3px solid #277ECD;
+       border-left-top-radius: 2px;
+     
+     }
+     .card2{
+       border-radius:13px;
+       background:var(--contact-form);
+       border-left: 3px solid #A8C714;
+       border-left-top-radius:2px;}
+     .card3{
+       border-radius: 13px;
+       background:var(--contact-form);
+       border-left: 3px solid #018872;
+       border-left-top-radius:2px;}
+     
+     
+     .card4{
+       border-radius:13px;
+       background:var(--contact-form);
+       border-left:3px solid #DA004E;
+       border-left-top-radius:2px;}
+   */  .card-body{
+       
+       
+       background:var(--contact-form)
+     }
+     
+     
+     
+     
+     
+   </style>
+
+  
+     
+   <div class="container">
+
+  
+  
+<% if(data){%>
+  <div class="row">
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold  text-uppercase mb-5">
+                            Join To Day</div>
+                    
+                        <div class="h5 mb-0 font-weight-bold"><%= join1%></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa-solid fa-user-plus fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+  
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card2 bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold  text-uppercase mb-5">
+                          Join in 7 Days</div>
+                      
+                        <div class="h5 mb-0 font-weight-bold"><%= join2%></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa-solid fa-users fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card3 bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-5">
+                leave today</div>
+                      
+                        <div class="h5 mb-0 font-weight-bold "><%= leave1%></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-file-signature fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="col-xl-3 col-md-6 mb-4">
+        <div class="card3 bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-5">
+                leave this week</div>
+                      
+                        <div class="h5 mb-0 font-weight-bold "><%= leave2%></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-file-signature fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card3 bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-5">
+                            Cases Count</div>
+                      
+                        <div class="h5 mb-0 font-weight-bold "><%= data.casesCount%></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-file-signature fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card4 bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold  text-uppercase mb-5">
+                        Prefix in Guild </div>
+                      
+                        <div class="h5 mb-0 font-weight-bold text-white"><%= data.prefix%></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fal fa-robot fa-2x "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+  
+  
+      </div>
+  
+    
+   <% }%> 
+
+<canvas id="myChart" width="400" height="400"></canvas>
+<script>
+  
+  const timeElapsed = Date.now();
+
+
+const today = new Date(timeElapsed);
+
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['join', 'join in 7 days', 'leave', 'leave in 7 days'],
+        datasets: [{
+            label:"join",
+            data: ['<%= join1%>', '<%=join2%>', '<%= leave1%>', '<%= leave2%>'],
+            backgroundColor: [
+               'rgba(75, 192, 192, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(254, 0, 26, 0.2)',
+                'rgba(254, 0, 26, 0.2)'
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 0.4)',
+                'rgba(75, 192, 192, 0.4)',
+                'rgba(254, 0, 26, 0.4)',
+                'rgba(254, 0, 26, 0.4)'            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+plugins: {
+            title: {
+                display: true,
+                text: 'show join and leave in your server',
+              color:'#fff',
+                padding: {
+                    top: 10,
+                  
+                    bottom: 30
+                }
+            }
+        },
+      
+
+      
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+            
+</script>
+
+
+     
+     </div>
+    
+<div class="footer-padding"></div>
+  
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <%- include ('../parts/foot.ejs')%>

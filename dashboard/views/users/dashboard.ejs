@@ -1,0 +1,151 @@
+
+ <%- include("../parts/head.ejs",{bot,user})%>
+
+   
+   
+   <style>
+     .card,.card2,.card3,.card4{
+       text-align:left;
+       
+       
+       border-radius: 13px;
+       border:1px solid wheat;
+       background:var(--contact-form);
+     
+       border-left-top-radius: 2px;
+     
+     }
+    
+     
+    .card i,.card2 i,.card3 i,.card4 i{
+font-size:24px;
+margin-bottom:55px;
+      background:#fff;
+color:#E4B400;
+border: 2px solid #E4B400;
+border-radius: 20%;
+       padding:12%;
+
+     }
+      .card-body{
+      background-color:var(--contact-form); 
+       
+       
+     }/*
+     .card2{
+       border-radius:13px;
+       background:var(--contact-form);
+      
+       border-left-top-radius:2px;}
+     .card3{
+       border-radius: 13px;
+       background:var(--contact-form);
+       
+       border-left-top-radius:2px}
+     
+     
+     .card4{
+       border-radius:13px;
+       background:var(--contact-form);
+       
+       border-left-top-radius:2px}
+     */
+     
+     
+    
+     
+     
+   </style>
+
+   
+     
+  <div style="padding-bottom:140px;"></div>
+   <div class="container">
+  
+  
+<% if(data){%>
+  <div class="row">
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-5">
+                            User Balance</div>
+                    
+                        <div class="h5 mb-0 font-weight-bold text-white">$<%=convert(data.money)%></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa-solid fa-money-bill fa-2x "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card2 bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold  text-uppercase mb-5">
+                            User Information</div>
+                    
+                        <div class="h5 mb-0 font-weight-bold text-white"><%= data.info||"not set"%></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa-solid fa-circle-info fa-2x "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card3 bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold  text-uppercase mb-5">
+                            User Rank</div>
+                      
+                        <div class="h5 mb-0 font-weight-bold text-white"><%= user_rank%></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa-solid fa-ranking-star fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card4 bg-dark-200 border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold  text-uppercase mb-5">
+                            User Level</div>
+                      
+                        <div class="h5 mb-0 font-weight-bold text-white"><%= data.data.global_level%></div>
+                    </div>
+                    <div class="col-auto">
+                     <i class="fa-solid fa-award fa-2x "></i>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      </div>
+  
+   <% }%> 
+
+
+
+
+
+     
+     </div>
+
+  <%- include('../parts/foot.ejs')%>

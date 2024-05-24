@@ -1,0 +1,926 @@
+<%- include ("../parts/sidebarguild",{bot,user}) %>
+<br>
+  <br>
+  <style>
+    .switch {
+  position:relative;
+  display: inline-block;
+  width:70px;
+
+text-align: right;
+      
+      
+  height:30px;
+}
+.slider{
+  
+position: absolute;
+  cursor:pointer;
+  left:0;
+  right:0;
+  transition:.4s;
+  border-radius:40px;
+  top:0;
+  bottom:0;
+  background:rgba(79, 78, 77, 0.74);;
+}
+  .switch #switch-form {
+    display:none;
+  }
+.slider:before{
+  position: absolute;
+  content:"";
+  height:28px;
+  width:28px;
+  box-shadow:0 0 10px 0 black;
+  left:0;
+  bottom:1px;
+  background-color:white;
+  transition:.4s;
+  border-radius:50px;
+  
+
+}
+  #switch-form:checked + .slider{
+
+background:var(--switch-form-bgcolor);
+
+  }
+#switch-form:checked + .slider:before{
+  
+transform: translateX(40px)
+
+}</style>
+   <div class="container">
+
+<div class="contact-image">
+      <i></i>
+  </div>
+  
+  <form method="POST">
+
+      
+  
+          
+        
+  
+    <br>
+  <br>
+
+      
+      
+  
+      
+       <div class="form-group d-flex">
+       <label><h4 style="color:var(--text-color)">LOGS</h4></label>
+  
+         
+         
+         <div class="form-check form-switch">
+       <% if(data.plugins.logs){ if(data.plugins.logs.enabled){ %>
+  <label class="switch "><input type="checkbox" id="switch-form" class="check" checked>
+  <span class="slider"></span>
+</label>
+
+         <% } else{%>
+          <label class="switch">  <input type="checkbox" id="switch-form"class="check" >
+  <span class="slider"></span>
+</label>
+
+           <% }}%>
+  <label class="form-check-label" for="checking"></label>
+</div>      
+           </div>
+        
+         <hr>
+ 
+<div class="container" id="hama">
+  <div class="row">
+  
+  <div class="col-xl-3 col-md-6 mb-4">
+
+  <div class="box">
+       <div class= "form-group d-flex">
+               <label> <h4>Channel Create</h4></label>
+               <div class="form-check form-switch">
+                 <% if(data.plugins.logs.channelCreate){if(data.plugins.logs.channelCreate.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="channelCreateonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                
+
+                     <label for="pickcolor" class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color channelCreatecolor" value="<%= data.plugins.logs.channelCreate.color%>">
+                      
+                   <% }else{%>
+                     <br>
+                     <label class="switch">  <input type="checkbox" class="channelCreateonoff"id="switch-form" >
+  <span class="slider"></span>
+                   </label>
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="channelCreatechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div></div>
+  </div>
+  
+  <br><br>
+  <div class="col-xl-3 col-md-6 mb-4">
+  <div class="box">
+      
+     <div class= "form-group d-flex">
+               <label><h4>Channel Delete</h4></label>
+               <div class="form-check form-switch">
+                 <% if(data.plugins.logs.channelDelete){if(data.plugins.logs.channelDelete.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="channelDeleteonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+<input type="color" id="colorpicker" class="form-color channelDeletecolor" value="<%= data.plugins.logs.channelDelete.color%>">
+                     
+                   <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="channelDeleteonoff"id="switch-form">
+  <span class="slider"></span>
+                   </label>
+                  
+                     <% }}%>
+
+                       <label for="pickcolor"class="colorpicker"></label>
+                     
+                      
+
+
+
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="channelDeletechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    </div>
+    
+     
+  
+
+  
+  
+  
+  
+  </div>
+  </div>
+  
+  
+  <br><br>
+  <div class="col-xl-3 col-md-6 mb-4">
+  
+      <div class="box">
+             <div class= "form-group d-flex">
+               <label> <h4>Channel Update</h4></label>
+               <div class="form-check form-switch">
+                 <% if(data.plugins.logs.channelUpdate){ if(data.plugins.logs.channelUpdate.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="channelUpdateonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+
+
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color channelUpdatecolor" value="<%= data.plugins.logs.channelUpdate.color%>">
+                      
+                   <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="channelUpdateonoff"id="switch-form">
+  <span class="slider"></span>
+                   </label>
+                  
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="channelUpdatechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+     
+
+  
+  </div>
+  
+  </div>
+  <br><br>
+ <div class="col-xl-3 col-md-6 mb-4"> 
+<div class="box">
+       <div class= "form-group d-flex">
+               <label><h4>Role Create</h4></label>
+   <div class="form-check form-switch">
+                 <% if(data.plugins.logs.roleCreate){ if(data.plugins.logs.roleCreate.enabled){%>
+                   <label class="switch">  <input type="checkbox" class="roleCreateonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color roleCreatecolor" value="<%= data.plugins.logs.roleCreate.color%>">
+                      
+                   <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="roleCreateonoff"id="switch-form" >
+  <span class="slider"></span>
+                   </label>
+                  
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="roleCreatechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+  </div>
+  
+  
+  </div>
+<br><br><div class="col-xl-3 col-md-6 mb-4">
+  <div class="box">
+       <div class= "form-group d-flex">
+               <label> <h4>Role Delete</h4></label>
+               <div class="form-check form-switch">
+                 <% if(data.plugins.logs.roleDelete){ if(data.plugins.logs.roleDelete.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="roleDeleteonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color roleDeletecolor" value="<%= data.plugins.logs.roleDelete.color%>">
+                      
+                   <% }else{%>
+                    
+                     <label class="switch">  <input type="checkbox" class="roleDeleteonoff"id="switch-form">
+  <span class="slider"></span>
+                   </label>
+                  
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="roleDeletechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+  </div>
+  </div>
+  <br>
+  <br>
+  <div class="col-xl-3 col-md-6 mb-4">
+<div class="box">
+  
+             <div class= "form-group d-flex">
+               <label><h4>Role Update</h4></label>
+               <div class="form-check form-switch">
+                 <% if(data.plugins.logs.roleUpdate){ if(data.plugins.logs.roleUpdate.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="roleUpdateonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+                  
+
+
+                     <label for="pickcolor"></label>
+                     <input type="color" id="colorpicker" class="form-color roleUpdatecolor" value="<%= data.plugins.logs.roleUpdate.color%>">
+                                         <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="roleUpdateonoff"id="switch-form" >
+  <span class="slider"></span>
+                   </label>
+                  
+                     <% }}%>
+                       
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="roleUpdatechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+     
+  
+  </div>
+  </div>
+  <br>
+  <br>
+                       <div class="col-xl-3 col-md-6 mb-4">
+  <div class="box">
+             <div class= "form-group d-flex">
+               <label> <h4>BanAdd</h4></label>
+               <div class="form-check form-switch">
+                
+                 <% if(data.plugins.logs.banAdd){ if(data.plugins.logs.banAdd.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="banAddonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color banAddcolor" value="<%= data.plugins.logs.banAdd.color%>">
+                      
+                   <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="banAddonoff"id="switch-form">
+  <span class="slider"></span>
+                   </label>
+                  
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="banAddchannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+     
+
+  
+  </div>
+  </div>
+  
+  <br><br>
+  
+                         <div class="col-xl-3 col-md-6 mb-4">
+  <div class="box">
+             <div class= "form-group d-flex">
+               <label> <h4>BanRemove</h4></label>
+               <div class="form-check form-switch">
+                
+                 <% if(data.plugins.logs.banRemove){ if(data.plugins.logs.banRemove.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="banRemoveonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+
+
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color banRemovecolor" value="<%= data.plugins.logs.banRemove.color%>">
+                      
+                   <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="banRemoveonoff"id="switch-form" >
+  <span class="slider"></span>
+                   </label>
+                  
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="banRemovechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+     
+
+  
+  </div>
+  </div>
+  
+  <br><br>
+                               <div class="col-xl-3 col-md-6 mb-4">
+  <div class="box">
+             <div class= "form-group d-flex">
+               <label> <h4>message Update</h4></label>
+               <div class="form-check form-switch">
+                
+                 <% if(data.plugins.logs.messageUpdate){ if(data.plugins.logs.messageUpdate.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="messageUpdateonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+
+
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color messageUpdatecolor" value="<%= data.plugins.logs.messageUpdate.color%>">
+                      
+                   <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="messageUpdateonoff"id="switch-form">
+  <span class="slider"></span>
+                   </label>
+                  
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color messageUpdatecolor" value="<%= data.plugins.logs.messageUpdate.color%>">
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="messageUpdatechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+     
+
+  
+  </div>
+  </div>
+      <br>
+      <br>
+                               <div class="col-xl-3 col-md-6 mb-4">
+  <div class="box">
+             <div class= "form-group d-flex">
+               <label> <h4>message Delete</h4></label>
+               <div class="form-check form-switch">
+                
+                 <% if(data.plugins.logs.messageDelete){ if(data.plugins.logs.messageDelete.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="messageDeleteonoff"id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color messageDeletecolor" value="<%= data.plugins.logs.messageDelete.color%>">
+                      
+                   <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="messageDeleteonoff"id="switch-form">
+  <span class="slider"></span>
+                   </label>
+                  
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color messageDeletecolor" value="<%= data.plugins.logs.messageDelete.color%>">
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="messageDeletechannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+     
+
+  
+  </div>
+  </div>
+      <br>
+      <br>
+      <div class="col-xl-3 col-md-6 mb-4">
+  <div class="box">
+             <div class= "form-group d-flex">
+               <label> <h4>kicks</h4></label>
+               <div class="form-check form-switch">
+                
+                 <% if(data.plugins.logs.kick){ if(data.plugins.logs.kick.enabled){%>
+                  
+                   <label class="switch">  <input type="checkbox" class="kickonoff" id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+                  
+
+
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color kickcolor" value="<%= data.plugins.logs.kick.color%>">
+                      
+                   <% }else{%>
+                     
+                     <label class="switch">  <input type="checkbox" class="kickonoff" id="switch-form" >
+  <span class="slider"></span>
+                   </label>
+                  
+                     
+                     <label for="pickcolor"class="colorpicker"></label>
+                     <input type="color" id="colorpicker" class="form-color kickcolor" value="<%= data.plugins.logs.kick.color%>">
+                     <% }}%>
+                       <div style="padding-bottom: 20px;"></div>
+  
+<select id="kickchannel">
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type===ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>"><%=channel.name%></option>
+    <% })%>
+</select>
+    
+   </div>
+    
+    
+    </div>
+     
+
+  
+  </div>
+  </div>
+<hr>
+
+  
+  
+  
+    <button type="submit" name="btnSubmit" id="myButton" onclick="clickOnAdd()" class="btn btn-primary"><i class="fa-bounce fa-solid fa-floppy-disk"></i>Apply</button>
+  </div>
+  </div>
+                       
+  </form>
+  
+
+</div>
+  </div>
+                  
+<br><br>
+  
+  
+      <script>
+        
+       document.addEventListener('DOMContentLoaded', function () {
+         
+         
+         
+         var banAddcheck = document.querySelector('.banAddonoff');
+         banAddcheck.addEventListener("change", function (){
+           
+           if(banAddcheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+               banAddonoff: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+                 banAddonoff: false}
+                      )}})
+
+
+
+var banRemovecheck = document.querySelector('.banRemoveonoff');
+         banRemovecheck.addEventListener("change", function (){
+           
+           if(banRemovecheck.checked){
+             $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+               banRemoveonoff: true
+             })}else{
+               $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+                 banRemoveonoff: false}
+                      )}})
+
+
+
+
+         
+var channelDeletecheck = document.querySelector('.channelDeleteonoff')
+      channelDeletecheck.addEventListener("change", function (){
+        
+ if(channelDeletecheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           channelDeleteonoff:true
+           
+         })}else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             channelDeleteonoff:false})
+         }
+         
+         
+                })
+         
+         
+         
+         var channelUpdatecheck = document.querySelector('.channelUpdateonoff')
+      channelUpdatecheck.addEventListener("change", function (){
+        
+ if(channelUpdatecheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           channelUpdateonoff:true
+           
+         })}else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             channelUpdateonoff:false})
+         }
+         
+         
+                })
+         
+         
+         
+         
+         
+       var channelCreatecheck = document.querySelector('.channelCreateonoff')
+      channelCreatecheck.addEventListener("change", function (){
+        
+ if(channelCreatecheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           channelCreateonoff:true
+           
+         })}else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             channelCreateonoff:false})
+         }
+         
+         
+                })
+         
+         
+         ///////roles
+var roleCreatecheck = document.querySelector('.roleCreateonoff')
+      roleCreatecheck.addEventListener("change", function (){
+        
+ if(roleCreatecheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           roleCreateonoff:true
+           
+         })}else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             roleCreateonoff:false})
+         }
+         
+         
+                })
+         var roleDeletecheck = document.querySelector('.roleDeleteonoff')
+      roleDeletecheck.addEventListener("change", function (){
+        
+ if(roleDeletecheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           roleDeleteonoff:true
+           
+         })}else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             roleDeleteonoff:false})
+         }
+         
+         
+                })
+         
+         
+         var roleUpdatecheck = document.querySelector('.roleUpdateonoff')
+      roleUpdatecheck.addEventListener("change", function (){
+        
+ if(roleUpdatecheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           roleUpdateonoff:true
+           
+         })}else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             roleUpdateonoff:false})
+         }
+         
+         
+                });
+        var messageUpdatecheck = document.querySelector('.messageUpdateonoff')
+      messageUpdatecheck.addEventListener("change", function (){
+        
+ if(messageUpdatecheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           messageUpdateonoff:true
+           
+         })
+ }else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             messageUpdateonoff:false
+           })
+         }
+         
+         
+                });
+         
+    ////////////message delete////////  
+       var messageDeletecheck = document.querySelector('.messageDeleteonoff')
+      messageDeletecheck.addEventListener("change", function (){
+        
+ if(messageDeletecheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           messageDeleteonoff:true
+           
+         })
+ }else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             messageDeleteonoff:false
+           })
+         }
+         
+         
+                });
+
+
+   var kickcheck = document.querySelector('.kickonoff')
+     kickcheck.addEventListener("change", function (){
+        
+ if(kickcheck.checked){
+         $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+           kickonoff:true
+           
+         })
+ }else{
+           $.post("/dashboard/guild/<%= guild.id%>/logsystem",{
+             kickonoff:false
+           })
+         }});
+         
+   var check = document.querySelector('.check');
+if(check.checked){
+  
+  document.getElementById("hama").style.display ="block";
+}else{ 
+  document.getElementById("hama").style.display ="none";
+};
+  check.addEventListener('change', function () {
+    if (check.checked) {
+    document.getElementById("hama").style.display="block";
+      
+      $.post("/dashboard/guild/<%=guild.id%>/logsystem",{
+        onoff:true,
+      
+      })
+      
+      // do this
+    } else {
+      
+  document.getElementById("hama").style.display = "none";
+      $.post("/dashboard/guild/<%=guild.id%>/logsystem",{
+        onoff:false,
+      
+        
+      })
+      console.log("no cheked");
+      // do that
+    }
+  });
+});
+  
+    function clickOnAdd(){
+    
+    
+$("#myButton").attr("disabled", true);
+    $("#myButton").html('<i class="p-2 fad fa-spinner fa-w-16 fa-pulse fa-lg"></i>');
+
+    setTimeout(() => {
+        $.post('/dashboard/guild/<%=guild.id%>/logsystem',{
+         channelCreatechannel: $("#channelCreatechannel").val(),
+          channelCreatecolor:$(".channelCreatecolor").val(),
+          channelDeletechannel:$("#channelDeletechannel").val(),
+          channelDeletecolor:$(".channelDeletecolor").val(),
+          channelUpdatechannel:$("#channelUpdatechannel").val(),
+          channelUpdatecolor:$(".channelUpdatecolor").val(),
+          roleCreatechannel:$("#roleCreatechannel").val(),
+          roleCreatecolor:$(".roleCreatecolor").val(),
+          roleDeletechannel:$("#roleDeletechannel").val(),
+          roleDeletecolor:$(".roleDeletecolor").val(),
+          roleUpdatechannel:$("#roleDeletechannel").val(),
+          roleUpdatecolor:$(".roleDeletecolor").val(),
+          banAddchannel:$("#banAddchannel").val(),
+          banAddcolor:$(".banAddcolor").val(),
+banRemovechannel:$("#banRemovechannel").val(),
+          banRemovecolor:$(".banRemovecolor").val(),
+                  messageDeletecolor:$(".messageDeletecolor").val(),
+          messageDeletechannel:$("#messageDeletechannel").val(),
+          messageUpdatecolor:$(".messageUpdatecolor").val(), 
+          messageUpdatechannel:$("#messageUpdatechannel").val(),
+kickcolor:$(".kickcolor").val(), 
+          kickchannel:$("#kickchannel").val()
+
+
+          
+          
+            
+    }).done(function(data){
+                
+                
+                
+                
+                if(data.error){
+                  const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  text: data.message,
+  icon: 'error',
+  title: 'something wrong'
+})
+  $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;    
+      
+    
+    
+    
+    }else{
+                  const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'successfully'
+})
+     
+  
+            $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;
+    
+    }
+              });
+    },2000)
+    }
+      
+        
+   </script>
+<%- include("../parts/foot.ejs")%>

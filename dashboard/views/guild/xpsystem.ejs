@@ -1,0 +1,290 @@
+<%- include ("../parts/sidebarguild",{bot,user}) %>
+
+<br>
+
+  <br>
+  
+  <style>
+        .switch {
+  position:relative;
+  display: inline-block;
+  width:70px;
+
+text-align: right;
+      
+      
+  height:30px;
+}
+.slider{
+  
+position: absolute;
+  cursor:pointer;
+  left:0;
+  right:0;
+  transition:.4s;
+  border-radius:40px;
+  top:0;
+  bottom:0;
+  background:rgba(79, 78, 77, 0.74);;
+}
+  .switch #switch-form {
+    display:none;
+  }
+.slider:before{
+  position: absolute;
+  content:"";
+  height:28px;
+  width:28px;
+  box-shadow:0 0 10px 0 black;
+  left:0;
+  bottom:1px;
+  background-color:white;
+  transition:.4s;
+  border-radius:50px;
+  
+
+}
+  #switch-form:checked + .slider{
+
+background:var(--switch-form-bgcolor);
+
+  }
+#switch-form:checked + .slider:before{
+  
+transform: translateX(40px)
+
+}</style>
+  
+  <div class="container">
+<div class="container contact-form">
+<div class="contact-image">
+      <i></i>
+  </div>
+
+  
+  <form method="POST" >
+  
+      
+     <div class="row">
+         
+      <br><br>      
+      <br/>
+   
+      
+    
+       <br>
+     <div class="form-group d-flex">
+       <label><h4 class="head">LEVELING</h4></label>
+     <div class="form-check form-switch">
+       <% if(data.xp.onoff){%>
+  <label class="switch">  <input type="checkbox" id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+         <% } else{%>
+          <label class="switch">  <input type="checkbox" id="switch-form">
+  <span class="slider"></span>
+                   </label>
+           <% }%>
+  <label class="form-check-label" for="check"></label>
+</div>      
+           </div>
+      <hr>
+         <div id="hama">
+     <div class="form-group" >
+  <label> TEXT LEVELING UP CHANNEL<span style="color: rgb(175, 22, 22)">*</span></label>
+   
+     <br>
+<select class="custom-select" name ="xpchannel" id="xpchannel">
+  <% if(data.xp.channel){%>
+    <option selected value="<%= guild.channels.cache.get(data.xp.channel).id%>"><p>in Database</p> #<%=guild.channels.cache.get(data.xp.channel).name%></option>
+  <% guild.channels.cache.map((channel)=>{ %>
+<% if(channel.type === "GUILD_CATEGORY")return;%>
+  <% if(channel.type ==="GUILD_VOICE") return;%>
+
+  
+      <option value="<%= channel.id %>">#<%=channel.name%></option>
+        <% })%>
+                     
+    <% }else{%>
+      <% guild.channels.cache.map((channel)=>{%>
+        <% if(channel.type=== ChannelType.GuildCategory) return;%>
+          <% if(channel.type === ChannelType.GuildVoice ) return;%>
+            <option value="<%= channel.id%>"><%= channel.name%></option>
+              <% }) }%>
+      </select>
+
+    
+    
+              </div>
+  
+  
+  <br><br><br><br><br>
+  <div class="form-group"> 
+    
+    
+    <label></label>
+    
+    <h6> VARIABLES:</h6>
+      <div class="variables">
+        <span>{user}</span> <p>mention member</p>
+    </div>
+    <div class="variables">
+ <span>{level}</span> <p>target new level of member</p>
+    
+
+    </div>
+        </div>
+    
+  
+ <textarea id="message" class="form-control" style="width: 100%; height: 300px;" required><%= data.xp.message%></textarea>       
+        
+        
+   <br><br><br><br><br><br><br>     
+     <!--                    <div class="form-group">
+                                          <label> XP POINTS  <span style="color: rgb(175, 22, 22)">*</span></label>
+           <br>   <br>
+                         <label for="max">Maximum Point </label>                                     
+  <input type="number" name="max" value="" id="max" placeholder="<%= data.xp.max%>"/>
+                             <label for="min">Minimum Points</label>
+   
+   <input type="number" name="min" value="" id="min" placeholder="<%= data.xp.min%>"/>
+  -->
+                                 
+   
+          <br>
+                             <br>
+          
+                        
+     
+     <br>
+                            <br>
+                            
+      
+               <button type="submit" name="btnSubmit" id="myButton" onclick="clickOnAdd()" class="btn btn-primary"><i class="fa-bounce fa-solid fa-floppy-disk"></i>Apply</button></div>
+   
+   </div>
+             
+  </form>
+  
+    
+</div>
+  
+             </div>
+<br><br>
+  
+  
+      <script>
+      
+   document.addEventListener('DOMContentLoaded', function () {
+  var checkbox = document.querySelector('#switch-form');
+if(checkbox.checked){
+  
+  document.getElementById("hama").style.display ="block";
+}else{ 
+  document.getElementById("hama").style.display ="none";
+};
+  checkbox.addEventListener('change', function () {
+
+    if (checkbox.checked) {
+    document.getElementById("hama").style.display="block";
+      
+      $.post("/dashboard/guild/<%=guild.id%>/xpsystem",{
+        onoff:true,
+    
+      })
+      
+      // do this
+      console.log('Checked');
+    } else {
+      
+  document.getElementById("hama").style.display = "none";
+      $.post("/dashboard/guild/<%=guild.id%>/xpsystem",{
+        onoff: false,
+        
+        
+      })
+      // do that
+      console.log('Not checked');
+    }
+  });
+});
+        
+        
+        
+        
+        
+        
+    
+      function clickOnAdd() {
+       
+        
+
+$("#myButton").attr("disabled", true);
+ $("#myButton").html('<i class="p-2 fad fa-spinner fa-w-16 fa-pulse fa-lg"></i>');
+
+    setTimeout(() => {
+      
+        $.post("/dashboard/guild/<%=guild.id%>/xpsystem",{
+        channel:$('#xpchannel').val(),
+          
+          message:$('#message').val(),
+          
+        
+        onoff: true,
+          
+        }).done(function(data){       
+                
+            if(data.error){
+      const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: ' something went wrong',
+  text: data.message,
+})
+  $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;    
+      
+    
+    
+    
+    }else{
+      const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: ' successfully'
+})
+            $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;
+      
+    
+    }})}, 2000)}
+
+        
+
+
+   </script>
+<%- include("../parts/foot.ejs")%>

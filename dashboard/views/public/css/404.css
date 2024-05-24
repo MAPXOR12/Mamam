@@ -1,0 +1,12 @@
+.container{
+  text-align: center;
+  color: white;
+}
+.container .text-content{
+  color: darkgray;
+}
+.container .link-back a{
+  text-decoration: none;
+  color: white;
+  opacity: 100%;
+}

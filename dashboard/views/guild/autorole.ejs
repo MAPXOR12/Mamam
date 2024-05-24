@@ -1,0 +1,246 @@
+<%- include ("../parts/sidebarguild",{bot,user}) %>
+
+<br>
+
+  <br>
+  <style>
+    .switch {
+  position:relative;
+  display:inlin-block;
+  width:70px;
+  height:30px;
+  margin: 0 10px;
+}
+.slider{
+position: absolute;
+  cursor:pointer;
+  left:0;
+  right:0;
+  transition:.4s;
+  border-radius:40px;
+  top:0;
+  bottom:0;
+  background:rgba(79, 78, 77, 0.74);;
+}
+  .switch #switch-form {
+    display:none;
+  }
+.slider:before{
+  position: absolute;
+  content:"";
+  height:28px;
+  width:28px;
+  box-shadow:0 0 10px 0 black;
+  left:0;
+  bottom:1px;
+  background-color:white;
+  transition:.4s;
+  border-radius:50px;
+  
+
+}
+  
+  #switch-form:checked + .slider{
+
+background:var(--switch-form-bgcolor);
+
+  }
+#switch-form:checked + .slider:before{
+  
+transform: translateX(40px)
+
+}</style>
+  
+  
+  <div class="container">
+<div class="container contact-form">
+<div class="contact-image">
+      <i></i>
+  </div>
+
+  
+  <form method="POST" >
+  
+      
+     <div class="row">
+         
+      <br><br>      
+      
+   
+      
+    
+       <br>
+     <div class="form-group d-flex">
+       <label><h4 class="head">AUTOROLE</h4></label>
+     <div class="form-check form-switch">
+       <% if(data.plugins.autorole.enabled){%>
+  <label class="switch"> <input type="checkbox" id="switch-form" class="check" checked>
+  <span class="slider"></span>
+  </label>
+         <% } else{%>
+          <label class="switch"><input type="checkbox" id="switch-form" class="check">
+  <span class="slider"></span>
+          </label>
+           <% }%>
+  <label class="form-check-label" for="check"></label>
+</div>      
+           </div>
+      <hr>
+    <div class="form-group" id="hama">
+          <label>CHOSE ROLE</label>
+      <br>
+      <br>
+             <select class="form-control" style="background:var(--form-input); margin-left:20px;color:#fff;"id="role">
+           <% if(data.plugins.autorole.enabled && guild.roles.cache.has(data.plugins.autorole.role)){ %>
+               <option value="<%= guild.roles.cache.get(data.plugins.autorole.role).id %>" selected="selected">@<%= guild.roles.cache.get(data.plugins.autorole.role).name %></option>
+  <% guild.roles.cache.filter((r) => r.id !== data.plugins.autorole.role && r.name !== "@everyone").forEach((r) => { %>
+               <option value="<%= r.id%>">@<%= r.name %></option>
+              <% }); } else { %>
+  <option selected="selected">@<%= guild.roles.cache.filter((r) => r.name !== "@everyone").first().name %></option>
+              <% guild.roles.cache.filter((r) => 
+r.id !== guild.roles.cache.filter((r) => r.name !== "@everyone").first().id && r.name !== "@everyone").forEach((r) => { %>
+                          <option value="<%= r.id%>">@<%= r.name %></option>
+                            <% }); %>
+                           <% } %>
+      </select>
+                   
+                      
+                        
+     
+     <br>
+                            <br>
+                            
+      
+               <button type="submit" onclick="clickAdd()" id="myButton" class="btn btnContactSubmit"><i class="fal fa-paper-plane"></i> Apply</button>
+                              </div></div>
+             
+  </form>
+  
+    
+</div>
+  
+             </div>
+<br><br>
+  
+  
+      <script>
+      
+   document.addEventListener('DOMContentLoaded', function () {
+  var checkbox = document.querySelector('.check');
+if(checkbox.checked){
+  
+  document.getElementById("hama").style.display ="block";
+}else{ 
+  document.getElementById("hama").style.display ="none";
+};
+  checkbox.addEventListener('change', function () {
+
+    if (checkbox.checked) {
+    document.getElementById("hama").style.display="block";
+      
+      $.post("/dashboard/guild/<%=guild.id%>/autorole",{
+        onoff:true,
+    
+      })
+      
+  
+    } else {
+      
+  document.getElementById("hama").style.display = "none";
+      $.post("/dashboard/guild/<%=guild.id%>/autorole",{
+        onoff: false,
+        
+        
+      })
+    
+    }
+  });
+}); 
+        
+        
+        
+        
+        
+        
+        
+      function clickAdd() {
+       
+        
+
+$("#myButton").attr("disabled", true);
+ $("#myButton").html('<i class="p-2 fad fa-spinner fa-w-16 fa-pulse fa-lg"></i>');
+
+    setTimeout(() => {
+      
+        $.post('/dashboard/guild/<%=guild.id%>/autorole',{
+        role:$('#role').val(),
+        
+          
+        }).done(function(data){
+        
+                
+                
+                
+                
+                if(data.error){
+      const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: ' something went wrong ',
+  text: data.message,
+})
+  $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;    
+      
+    
+    
+    
+    }else{
+     
+  const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'successfully'
+})
+      
+            $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;
+                      
+      
+      
+    
+    }});
+     },2000)
+
+    }
+
+        
+       
+        
+
+   </script>
+<%- include("../parts/foot.ejs")%>

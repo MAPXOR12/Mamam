@@ -1,0 +1,161 @@
+ <%- include ('./parts/meta.ejs',{bot,user})%>
+ 
+       <link rel="stylesheet" type="text/css" href=public/css/index.css" />
+              <link rel="stylesheet" type="text/css" href=public/css/style.css" />
+   <div class="fade-in">
+    
+  <div class="main-container">
+   <br>
+    <br>
+      <img style="height:150px; width:150px; border-radius:50%; border:2px solid green" src="https://boboworld.xyz/img/logo.jpg"/>
+    
+    <h3 class="bobo-text"><p style="color: var(--bobo-color); font-weight:600">BOBO</p> BOT DASHBOARD</h3>
+    <div class="text-title">
+    <p class="text-break" style="color:var(--h-color);font-weight:400;">Welcome to BoBo Discord Bot Dashboard you can add Welcome ,logs, moderation,  Auto roles and many many more!</p>
+    </div>
+  </div>
+  </div>
+
+ <br><br>
+   <br>
+   
+
+       <div class="button-container">
+
+         
+         <ul>
+        
+         
+        
+ 
+         <% if (user){ %>
+           <li ><a href="/invite"style="background:rgb(142,135,255)"><i class="fa-brands fa-discord" style="color:var(--icon-color); font-size:25px;margin-right:20px;"></i> Add to Discord server</a></li>
+           <br>
+          
+          
+           <li><a href="/dashboard"style="border:3px solid var(--h-color); font-weight:600">Dashboard</a></li>
+           
+     <br>
+           <li><a href="/support"style="border:3px solid var(--h-color); font-weight:600">Support server</a></li>
+      
+        
+        <% }else{%>
+          
+          
+          <li><a 
+href="/login" style="background:rgb(142,135,255);font-weight:600"><i class="fa-brands fa-discord" style="color:var(--icon-color); font-size:25px; margin-right:20px;"></i>Login</a></li>
+          <br>
+          
+          <li><a href="/invite" style="border:3px solid var(--h-color);font-weight:600">Add to discord</a></li>
+      <br>
+      
+          <li><a href="/support" style="border:3px solid var(--h-color);font-weight:600">support server</a></li>
+<% } %>
+
+  </ul>
+    </div>
+              
+    <br><br>
+ 
+    
+    
+    <div  class="container">
+      
+    <br>
+      <br>
+      <br>
+  
+      <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4" style="color:white;text-align: center;">
+          
+          
+        <img src="https://boboworld.xyz/img/mod.svg" width="130px" height="130px">
+        <h1 style="color: var(--h-color);">Moderation</h1>
+        <br>
+        <p style="color: var(--text-color)">Ban, kick, mute, and warn with ease. With persistent logs, rest assured that you can point fingers when something goes wrong.</p>
+        
+        <ul style="color:var(--text-color)">
+          <li><i class="fa-solid fa-check" style="color:#18AD58"></i> slashcommand support</li>
+          
+          <li><i class="fa-solid fa-check" style="color:#18AD58"></i> Individual command permissions</li>
+          <li> <i class=" fa-solid fa-check" style="color:#18AD58"></i> Persistent audit logs</li>
+          </ul>
+            
+          
+          </div>
+            <div class="col-xl-3 col-md-6 mb-4" style="color:white;text-align: center;">
+              <img src="https://boboworld.xyz/img/musicnote.jpg" width="130px;" height="130px" loading="crazy">
+        <h1 style="background:transparent;color: var(--h-color);">Music</h1>
+          <p style="color: var(--text-color)">Hang out with your server members in voice and stage channels all while vibing to your favorite music using Mai's high quality player for the low price of free.</p>
+          <ul style="color:var(--text-color);">
+            <li><i class="fa-solid fa-check" style="color:#18AD58"></i> High quality music</li>
+            <li><i class="fa-solid fa-check" style="color:#18AD58"></i> Music controls and effects</li>
+            <li><i class="fa-solid fa-check" style="color:#18AD58"></i> Easy to use commands</li>
+          </ul>
+        </div>
+            <div class="col-xl-3 col-md-6 mb-4" style="color:var(--text-color);text-align: center;">
+              <img src="https://boboworld.xyz/img/statusbar.png"  width="130px" height="130px"loading="crazy">
+              
+              <h1 style="color:var(--h-color);">Economy</h1>
+              <p style="color:var(--text-color)">transfer, daily, balance, secure your balance easy to transfer </p>
+             <ul style="color:var(--text-color)";>
+              
+              <li><i class="fa-solid fa-check" style="color:#18AD58"></i> easy to use</li>
+              <li><i class="fa-solid fa-check" style="color:#18AD58"></i> Slash commands for easy access</li>
+              </ul>
+            </div>  
+      <div class="col-xl-3 col-md-6 mb-4" style="color:white;text-align: center;">
+          
+        <img src="https://boboworld.xyz/img/welcome.png" width="130px" height="130px">
+        
+        <h1 style="color:var(--h-color)">Welcomer</h1>
+        <p style="color: var(--text-color);"> welcome system with custom image include (member, memberCount, server name</p>
+      
+    
+      
+        </div>
+      
+      
+      
+      
+           </div>
+           <br>
+           <br>
+      <style>
+        .col-xl-3 ul li{
+          
+          list-style:none;
+        }
+
+      .info-bot ul{
+        line-height:60px;
+        
+        }
+        .info-bot ul li{
+          list-style: none;
+    position: relative;
+          margin-left:-300px;
+          font-size:35px;
+          color:var(--text-color);
+            
+        justify-content: space-evenly
+        }
+        .info-bot ul li sub{
+          
+         color:var(--icon-color);
+          margin-right:30px;
+          font-size:15px;
+          margin-top:20px;
+        }
+        
+      </style>
+      <did class="info-bot">
+      <ul>
+        <li>+ <%=bot.guilds.cache.size%><sub>Servers</sub></li>
+              <li>+ <%=bot.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0) %><sub>Users</sub></li>
+                
+            </ul>
+        </div>
+             
+    
+<%- include ('./parts/foot.ejs')%>

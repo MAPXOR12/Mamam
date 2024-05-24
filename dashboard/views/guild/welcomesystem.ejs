@@ -1,0 +1,322 @@
+<%- include ("../parts/sidebarguild",{bot,user}) %>
+<br>
+  <br>
+  <style>
+    .switch {
+  position:relative;
+  display: inline-block;
+  width:70px;
+
+text-align: right;
+      
+      
+  height:30px;
+}
+.slider{
+  
+position: absolute;
+  cursor:pointer;
+  left:0;
+  right:0;
+  transition:.4s;
+  border-radius:40px;
+  top:0;
+  bottom:0;
+  background:rgba(79, 78, 77, 0.74);;
+}
+  .switch #switch-form {
+    display:none;
+  }
+.slider:before{
+  position: absolute;
+  content:"";
+  height:28px;
+  width:28px;
+  box-shadow:0 0 10px 0 black;
+  left:0;
+  bottom:1px;
+  background-color:white;
+  transition:.4s;
+  border-radius:50px;
+  
+
+}
+  #switch-form:checked + .slider{
+
+background:var(--switch-form-bgcolor);
+
+  }
+#switch-form:checked + .slider:before{
+  
+transform: translateX(40px)
+
+}
+  </style>
+   <div class="container">
+<div class="container contact-form">
+<div class="contact-image">
+      <i></i>
+  </div>
+  
+  <form method="POST">
+  
+      
+     <div class="row">
+          
+            
+    <br>
+    <br>
+    
+       <div class="form-group d-flex">
+       <label><h4 class="head">welcome</h4></label>
+     <div class="form-check form-switch">
+       <% if(data.plugins.welcome.enabled){ %>
+  <label class="switch">  <input type="checkbox" id="switch-form"checked >
+  <span class="slider"></span>
+                   </label>
+         <% } else{%>
+          <label class="switch">  <input type="checkbox" id="switch-form" >
+  <span class="slider"></span>
+                   </label>
+           <% }%>
+  <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+</div>      
+           </div>
+      <hr>
+<div id="hama">
+  <div class="form-group">
+  <label for="channel" class="form-label">Welcome Channel <span style="color:rgba(175,22,22)">*</span></label>
+
+<select id="channel" style="width:200px; background:#717179;color: white;">
+<% if(data.plugins.welcome.channel){%>
+    <option selected value="<%=data.plugins.welcome.channel%>">#
+      <%=guild.channels.cache.get(data.plugins.welcome.channel).name%>
+ </option>%}else{%>
+<% guild.channels.cache.map((channel)=>{%>
+  <% if(channel.type === ChannelType.GuildCategory) return;%>
+ <% if(channel.type === ChannelType.GuildVoice) return; %>
+  
+  <option value="<%= channel.id %>">#<%=channel.name%></option>
+
+    <% })}%>
+</select>
+    
+        <h6> VARIABLES:</h6>
+      <div class="variables">
+        <span>{user}</span> <p>mention member</p>
+    </div>
+    <div class="variables">
+ <span>{server}</span> <p>server name </p>
+    </div>
+    <div class="variables">
+<span>{membercount}</span>
+      <p>member count of server</p>
+      
+    </div>
+    <br>
+   
+    <% if(data.plugins.welcome.withImage){%>
+    <input class="form-check-input" type="checkbox" id="withImg" checked>
+
+    <label class="form-check-label" for="withImg">WithImage</label>
+  <% }else{ %>
+        <input class="form-check-input" type="checkbox" id="withImg">
+      
+    
+    <label for="withImg">With Image</label>
+  <% }%>
+    <br>
+    <br>
+    <textarea maxlength="600" class="form-control"  id="welcomemessage" required><%= data.plugins.welcome.message%></textarea>
+  </div> 
+    <br>
+    <div class="withImage">
+    <div class="form-group">
+      <label> Welcome Image Title</label>
+      <input type="text" maxlength="13" id="ImageTitile" value="<%= data.plugins.welcome.title%>"class="form-control" placeholder="Typing here"><%= data.plugins.welcome.title%></input>
+      
+      
+    </div>
+    <div class="form-group">
+      <label> Welcome Image </label>
+      <input class="form-control" id="ImageURL" type="text" value="<%= data.plugins.welcome.welcomeImage%>" placeholder="Put your image URL must imugar URL"></input
+    </div>
+      </div>
+    </div>
+<hr>
+  
+    <br>
+    <br>
+    </div>
+    <button type="submit" id="myButton" onclick="clickOnAdd()" name="btnSubmit" class="btn btn-primary"><i class="fad fa-save"></i>Apply</button>
+    </div>
+    
+  
+  </form>
+  
+
+</div>
+  </div>
+<br><br>
+  
+  
+      <script>
+            
+  
+        
+       document.addEventListener('DOMContentLoaded', function () {
+   
+         
+         
+         //////////////   
+         var checkbox2 = document.querySelector('input[id="withImg"]');
+          var withImage = document.querySelector('.withImage');
+         var hama = document.querySelector("#hama");
+         
+         checkbox2.addEventListener('change', function (){
+         if(checkbox2.checked){
+           
+           withImage.style.display = "block";
+           $.post("/dashboard/guild/<%=guild.id%>/welcome",{
+             withImg: true,
+            onoff:true,
+           });
+         
+         }else{
+           
+           withImage.style.display = "none";
+             $.post("/dashboard/guild/<%=guild.id%>/welcome",{
+               withImg:false,
+              onoff:true,
+             });
+         }///////////
+         })
+         if(checkbox2.checked){
+           
+           withImage.style.display= "block";
+         }else{
+           withImage.style.display = "none";
+           
+         }
+  var checkbox = document.querySelector('input[id="switch-form"]');
+if(checkbox.checked){
+  
+  document.getElementById("hama").style.display ="block";
+}else{ 
+  document.getElementById("hama").style.display ="none";
+};
+  checkbox.addEventListener('change', function () {
+    
+    if (checkbox.checked) {
+    
+    document.getElementById("hama").style.display="block";
+      
+      $.post("/dashboard/guild/<%=guild.id%>/welcome",{
+        onoff:true,
+        
+      
+      })
+      
+      // do this
+    } else {
+      
+  document.getElementById("hama").style.display = "none";
+      $.post("/dashboard/guild/<%=guild.id%>/welcome",{
+        onoff:false,
+        
+      
+        
+        
+      })
+      // do that
+    }
+  });
+}); 
+          function clickOnAdd(){
+    
+    
+$("#myButton").attr("disabled", true);
+    $("#myButton").html('<i class="p-2 fad fa-spinner fa-w-16 fa-pulse fa-lg"></i>');
+
+    setTimeout(() => {
+
+      
+      
+    
+      
+  
+  
+              $.post('/dashboard/guild/<%=guild.id%>/welcome',{
+                 channel:$('#channel').val(),
+                  title: $("#ImageTitile").val(),
+                URL: $("#ImageURL").val(),
+                 message:$('#welcomemessage').val(),
+                 withImg: true,
+                 onoff: true,
+            
+    }).done(function(data){
+                
+                
+                
+                
+                if(data.error){
+      const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseleave', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }})
+    
+Toast.fire({
+  icon: 'error',
+  title: 'we have problem',
+  text: data.message,
+  footer: `<%=guild.name%>` + '<br>' + 'BoBo Dashboard',
+  
+})
+                  
+  $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;    
+      
+    
+    
+    
+    }else{
+     
+  
+      const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+      
+  Toast.fire({
+  icon: 'success',
+  title: 'successful...',
+  text:data.message,
+    
+  })
+            $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").attr("disabled", false);
+                    return;
+    
+    }
+              });
+    },2000)
+    }
+      
+        
+   </script>
+<%- include("../parts/foot.ejs")%>

@@ -1,0 +1,209 @@
+.fade-in {
+  animation: fadeIn ease 5s;
+  -webkit-animation: fadeIn ease 5s;
+  -moz-animation: fadeIn ease 5s;
+  -o-animation: fadeIn ease 5s;
+  -ms-animation: fadeIn ease 5s;
+}
+@keyframes fadeIn {
+  0% {
+    
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} /*
+@media screen and (max-: 3px) {
+  .button-container {
+    
+    
+    display: none;
+  }
+
+  .button-container li {
+    margin-right: 30px;
+    list-style: none;
+  }
+
+  .text-page {
+    text-align: center;
+  }
+}*/
+.fade-in-scroll {
+  opacity: 0;
+}
+
+.button-container {
+
+  display:block;
+  
+  
+  margin-top: 260px;
+}
+
+.button-container ul {
+  /*min-width:80px;*/
+  
+  list-style: none;
+  
+}
+
+.button-container li a {
+  text-align: center;
+display:block;
+  margin-right: 20px;
+  margin-left: 0px;
+  padding: 10px;
+  text-decoration: none;
+  color: var(--text-color);
+  min-width: 100px;
+  text-align: center;
+
+transition:all 1s ease;
+  border-radius: 5px;
+}
+.button-container li a:hover{
+  display:block;
+  transform: translate(0px,20px);
+ 
+  transition:all 1s ease;
+  
+  
+}
+
+/***----------all text information-------**/
+.text-page {
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 300px;
+
+  padding-left: 10px;
+  /* animation: anime 30s ease-out infinite;*/
+}
+.text-page .text-contet {
+  /* font-size: 30px;*/
+  text-align: center;
+}
+
+.icons .icon {
+  color: white;
+  font-size: 20px;
+}
+/**+++++----- preloader------*/
+
+#preloader {
+  height: 200vh;
+
+  background: var(--navlist-color);
+
+  width: 100%;
+  position: fixed;
+
+  z-index: 100;
+}
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+/****----- index page*-----*/
+.bot-info {
+  display: flex;
+  line-height: 190px;
+}
+.bot-info .guild-info {
+  color: white;
+  font-size: 22px;
+  margin-left: 22px;
+}
+.bot-info span {
+  font-size: 22px;
+  color: pink;
+}
+.bot-info .user-info {
+  color: white;
+  font-size: 22px;
+  margin-left: 22px;
+}
+.img-index{
+  
+  opacity:0;
+  transition:150ms;
+  transform: translateX(100px);
+  
+  
+}
+.img-index.show{
+  
+  opacity:1;
+  transform: translateX(0);}
